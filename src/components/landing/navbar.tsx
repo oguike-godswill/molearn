@@ -451,7 +451,7 @@ function MobileDrawer({
   pathname: string
   searchParams: URLSearchParams
 }) {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
   const user = session?.user
   const initials = user?.name?.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) || "U"
 
@@ -569,7 +569,7 @@ function MobileDrawer({
               </div>
 
               <div className="border-t border-border p-4 space-y-2">
-                {session ? (
+                {status === "loading" ? null : session ? (
                   <Button onClick={() => { onClose(); signOut() }} variant="secondary" size="sm" className="w-full justify-start gap-2">
                     <LogOut className="h-4 w-4" />Sign out
                   </Button>
@@ -609,7 +609,7 @@ export function Navbar() {
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
   const notifTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
   const avatarTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -765,7 +765,7 @@ export function Navbar() {
 
             {/* Auth */}
             <div className="hidden md:flex items-center gap-1.5 ml-1">
-              {session ? (
+              {status === "loading" ? null : session ? (
                 <div
                   className="relative"
                   onMouseEnter={() => { if (avatarTimeout.current) clearTimeout(avatarTimeout.current); setAvatarOpen(true) }}

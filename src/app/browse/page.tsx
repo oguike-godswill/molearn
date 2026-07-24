@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input"
 import { BookOpen, Clock, Code2, Film, Globe, Layers, Play, Search, Star, Users, SlidersHorizontal, Grid3X3, List, ChevronDown, X, ShoppingCart } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useState, useMemo } from "react"
+import { useState, useMemo, Suspense } from "react"
+import { Navbar } from "@/components/landing/navbar"
 import { useCart } from "@/lib/cart-context"
 import { useToast } from "@/components/ui/toast"
 
@@ -154,25 +155,11 @@ export default function BrowsePage() {
 
   return (
     <div className="min-h-screen bg-bg-primary">
-      {/* Header */}
-      <header className="border-b border-border">
-        <div className="w-full flex items-center justify-between px-4 py-4">
-          <Link href="/" className="flex items-center gap-2 text-lg font-black tracking-tight text-text-primary" style={{ fontFamily: "var(--font-logo)" }}>
-            <BookOpen className="h-5 w-5 text-accent" />
-            molearn
-          </Link>
-          <div className="flex items-center gap-3">
-            <Link href="/login">
-              <Button variant="ghost" size="sm">Sign in</Button>
-            </Link>
-            <Link href="/register">
-              <Button size="sm">Join</Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Suspense fallback={null}>
+        <Navbar />
+      </Suspense>
 
-      <main className="w-full px-4 py-10">
+      <main className="w-full px-4 py-10 pt-24">
         {/* Page header */}
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-text-primary">Marketplace</h1>
