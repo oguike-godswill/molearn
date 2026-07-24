@@ -1,0 +1,154 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  STUDENT
+  TEACHER
+  AGENT
+  ADMIN
+}
+
+enum ProductType {
+  VIDEO
+  BOOK
+}
+
+enum ProductStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id               String         @id @default(cuid())
+  email            String         @unique
+  name             String?
+  password         String?
+  image            String?
+  bio              String?
+  role             Role           @default(STUDENT)
+  stripeAccountId  String?
+
+  products         Product[]
+  reviews          Review[]
+  purchases        Purchase[]
+  enrollments      Enrollment[]
+  notifications    Notification[]
+  payouts          Payout[]
+
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  name     String    @unique
+  slug     String    @unique
+  icon     String?
+
+  products Product[]
+}
+
+model Product {
+  id            String        @id @default(cuid())
+  title         String
+  description   String
+  type          ProductType
+  price         Int
+  fileUrl       String?
+  thumbnail     String?
+  status        ProductStatus @default(PENDING)
+  agentNote     String?
+  level         String?
+  duration      String?
+
+  teacher       User          @relation(fields: [teacherId], references: [id])
+  teacherId     String
+
+  category      Category?     @relation(fields: [categoryId], references: [id])
+  categoryId    String?
+
+  reviews       Review[]
+  purchases     Purchase[]
+  enrollments   Enrollment[]
+
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  rating    Int
+  comment   String?
+
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+
+  createdAt DateTime @default(now())
+
+  @@unique([productId, userId])
+}
+
+model Purchase {
+  id              String   @id @default(cuid())
+  amount          Int
+  fee             Int
+  teacherAmount   Int
+  stripePaymentId String?
+
+  product         Product  @relation(fields: [productId], references: [id])
+  productId       String
+
+  buyer           User     @relation(fields: [buyerId], references: [id])
+  buyerId         String
+
+  createdAt       DateTime @default(now())
+}
+
+model Enrollment {
+  id        String   @id @default(cuid())
+  progress  Float    @default(0)
+
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+
+  student   User     @relation(fields: [studentId], references: [id])
+  studentId String
+
+  createdAt DateTime @default(now())
+
+  @@unique([productId, studentId])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  type      String?
+
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+
+  createdAt DateTime @default(now())
+}
+
+model Payout {
+  id             String   @id @default(cuid())
+  amount         Int
+  status         String   @default("PENDING")
+  stripePayoutId String?
+
+  teacher        User     @relation(fields: [teacherId], references: [id])
+  teacherId      String
+
+  createdAt      DateTime @default(now())
+}
