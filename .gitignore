@@ -42,6 +42,9 @@ dev-server-err.log
 # local SQLite db (Neon is used in production)
 prisma/dev.db
 
+# generated Prisma client
+src/generated/
+
 # vercel
 .vercel
 
