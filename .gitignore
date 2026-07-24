@@ -33,6 +33,15 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# local dev logs
+dev.log
+dev.err
+dev-server.log
+dev-server-err.log
+
+# local SQLite db (Neon is used in production)
+prisma/dev.db
+
 # vercel
 .vercel
 
