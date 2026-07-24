@@ -1,4 +1,4 @@
-const { PrismaClient } = require("../src/generated/prisma")
+const { PrismaClient } = require("@prisma/client")
 const { PrismaNeon } = require("@prisma/adapter-neon")
 const bcrypt = require("bcryptjs")
 const fs = require("fs")
