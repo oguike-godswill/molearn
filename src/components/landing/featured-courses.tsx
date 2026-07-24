@@ -64,8 +64,8 @@ export function FeaturedCourses() {
     <section className="w-full px-4 py-20 relative z-10">
       <div className="flex items-end justify-between mb-10">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-text-primary">Featured Courses</h2>
-          <p className="mt-2 text-sm text-text-secondary">Top-rated courses picked by our editors</p>
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-text-primary">Featured Courses</h2>
+          <p className="mt-2 text-sm text-text-secondary font-medium sm:font-normal">Top-rated courses picked by our editors</p>
         </div>
         <div className="hidden sm:flex items-center gap-2">
           <Link href="/browse">

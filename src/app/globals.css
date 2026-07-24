@@ -5,8 +5,8 @@
   --color-bg-secondary: #141414;
   --color-bg-elevated: #1a1a1a;
   --color-text-primary: #f5f5f5;
-  --color-text-secondary: #8a8a8a;
-  --color-text-muted: #555555;
+  --color-text-secondary: #a0a0a0;
+  --color-text-muted: #6b7280;
   --color-border: #2a2a2a;
   --color-border-hover: #3a3a3a;
   --color-accent: #5b6bf7;
@@ -88,5 +88,23 @@ html {
     font-family: var(--font-sans), system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    font-weight: 450;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+  }
+  .text-sm, p, li, a, button, span, label, input, textarea, select {
+    font-weight: 450;
+  }
+  .font-bold, .font-semibold, strong, b {
+    font-weight: 650;
+  }
+  .font-extrabold, .font-black {
+    font-weight: 800;
   }
 }

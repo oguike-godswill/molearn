@@ -213,10 +213,10 @@ export function Footer() {
           transition={{ duration: 0.55 }}
           className="max-w-2xl mx-auto bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 shadow-xl px-8 py-10 text-center"
         >
-          <h2 className="text-3xl font-extrabold text-white tracking-tight leading-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-text-primary tracking-tight leading-tight">
             Subscribe to our newsletter
           </h2>
-          <p className="mt-2 text-sm text-gray-400">
+          <p className="mt-2 text-sm text-text-secondary">
             Get weekly updates on new courses, creator tips, and platform news. No spam.
           </p>
 
@@ -259,14 +259,14 @@ export function Footer() {
         >
           <div className="relative flex flex-col md:flex-row items-center justify-between px-8 py-10 sm:px-12 sm:py-14 gap-8">
             <div className="flex-1 max-w-lg">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#5b6bf7]/20 text-[#5b6bf7] border border-[#5b6bf7]/40 mb-4">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-accent/20 text-accent border border-accent/40 mb-4">
                 Join 48,000+ Learners
               </span>
-              <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight tracking-tight">
+              <h3 className="text-2xl sm:text-4xl md:text-5xl font-black text-text-primary leading-tight tracking-tight">
                 Experience superior<br />
-                <span className="text-[#5b6bf7]">learning, today.</span>
+                <span className="text-accent">learning, today.</span>
               </h3>
-              <p className="mt-3 text-sm sm:text-base text-gray-300">
+              <p className="mt-3 text-sm sm:text-base text-text-secondary">
                 1,200+ expert-led courses and books — learn at your pace with lifetime access.
               </p>
               <Link href="/browse">
@@ -293,14 +293,14 @@ export function Footer() {
             <div className="lg:col-span-1">
               <Link
                 href="/"
-                className="inline-flex items-center gap-2.5 text-xl font-black tracking-tight text-white hover:opacity-90 transition-opacity"
+                className="inline-flex items-center gap-2.5 text-xl font-black tracking-tight text-text-primary hover:opacity-90 transition-opacity"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#5b6bf7] shadow-lg shadow-[#5b6bf7]/20">
+                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-accent shadow-lg shadow-accent/20">
                   <BookOpen className="h-4 w-4 text-white" />
                 </div>
                 molearn
               </Link>
-              <p className="mt-4 text-sm text-gray-500 leading-relaxed max-w-[220px]">
+              <p className="mt-4 text-sm text-text-muted leading-relaxed max-w-[220px]">
                 The marketplace where knowledge meets ambition.
               </p>
 
@@ -313,14 +313,14 @@ export function Footer() {
                   </address>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <Phone className="h-3.5 w-3.5 text-gray-600 shrink-0" />
-                  <a href="tel:+2348000000000" className="text-xs text-gray-500 hover:text-white transition-colors">
+                  <Phone className="h-3.5 w-3.5 text-text-muted shrink-0" />
+                  <a href="tel:+2348000000000" className="text-xs text-text-muted hover:text-text-primary transition-colors">
                     +234-800-000-0000
                   </a>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <Mail className="h-3.5 w-3.5 text-gray-600 shrink-0" />
-                  <a href="mailto:hello@molearn.com" className="text-xs text-gray-500 hover:text-white transition-colors">
+                  <Mail className="h-3.5 w-3.5 text-text-muted shrink-0" />
+                  <a href="mailto:hello@molearn.com" className="text-xs text-text-muted hover:text-text-primary transition-colors">
                     hello@molearn.com
                   </a>
                 </div>
@@ -348,12 +348,12 @@ export function Footer() {
 
             {/* Quick links */}
             <div>
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-600">Quick links</h4>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-text-muted">Quick links</h4>
               <ul className="mt-4 space-y-3">
                 {quickLinks.map((l) => (
                   <li key={l.label}>
-                    <Link href={l.href} className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 group">
-                      <span className="w-0 group-hover:w-2 overflow-hidden transition-all duration-200 text-[#5b6bf7]">›</span>
+                    <Link href={l.href} className="text-sm text-text-secondary hover:text-text-primary transition-colors flex items-center gap-1.5 group">
+                      <span className="w-0 group-hover:w-2 overflow-hidden transition-all duration-200 text-accent">›</span>
                       {l.label}
                     </Link>
                   </li>
@@ -363,12 +363,12 @@ export function Footer() {
 
             {/* Legal */}
             <div>
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-600">Legal</h4>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-text-muted">Legal</h4>
               <ul className="mt-4 space-y-3">
                 {legalLinks.map((l) => (
                   <li key={l.label}>
-                    <Link href={l.href} className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 group">
-                      <span className="w-0 group-hover:w-2 overflow-hidden transition-all duration-200 text-[#5b6bf7]">›</span>
+                    <Link href={l.href} className="text-sm text-text-secondary hover:text-text-primary transition-colors flex items-center gap-1.5 group">
+                      <span className="w-0 group-hover:w-2 overflow-hidden transition-all duration-200 text-accent">›</span>
                       {l.label}
                     </Link>
                   </li>
@@ -378,7 +378,7 @@ export function Footer() {
 
             {/* Stats column */}
             <div>
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-600">Platform stats</h4>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-text-muted">Platform stats</h4>
               <div className="mt-4 grid grid-cols-2 gap-3">
                 {[
                   { value: "1,200+", label: "Courses" },
@@ -387,8 +387,8 @@ export function Footer() {
                   { value: "4.8★", label: "Avg rating" },
                 ].map((stat) => (
                   <div key={stat.label} className="bg-white/[0.03] border border-white/5 rounded-xl p-3">
-                    <p className="text-base font-bold text-white">{stat.value}</p>
-                    <p className="text-[11px] text-gray-600 mt-0.5">{stat.label}</p>
+                    <p className="text-base font-bold text-text-primary">{stat.value}</p>
+                    <p className="text-[11px] text-text-muted mt-0.5">{stat.label}</p>
                   </div>
                 ))}
               </div>
@@ -397,12 +397,12 @@ export function Footer() {
 
           {/* Bottom bar */}
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p className="text-xs text-gray-600">
+            <p className="text-xs text-text-muted">
               © {new Date().getFullYear()} molearn. All rights reserved.
             </p>
             <div className="flex items-center gap-4">
               {legalLinks.map((l) => (
-                <Link key={l.label} href={l.href} className="text-xs text-gray-600 hover:text-gray-400 transition-colors">
+                <Link key={l.label} href={l.href} className="text-xs text-text-muted hover:text-text-secondary transition-colors">
                   {l.label}
                 </Link>
               ))}

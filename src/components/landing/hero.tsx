@@ -494,15 +494,15 @@ export function Hero() {
             </motion.div>
 
             {/* Main Headline (Crisp solid typography, NO gradients) */}
-            <motion.h1 variants={fadeUp} className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-white">
+            <motion.h1 variants={fadeUp} className="text-[2.5rem] sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-white">
               Teach what you know. <br />
               <span className="text-[#5b6bf7]">
                 Earn 80% revenue.
               </span>
             </motion.h1>
 
-            {/* Subtitle */}
-            <motion.p variants={fadeUp} className="mt-6 text-base sm:text-lg text-gray-300 leading-relaxed max-w-xl">
+              {/* Subtitle */}
+            <motion.p variants={fadeUp} className="mt-6 text-base sm:text-lg text-text-secondary leading-relaxed max-w-xl">
               Publish video masterclasses & e-books. Our AI agent network verifies content quality, sets fair pricing, and protects your intellectual property while giving you maximum earnings.
             </motion.p>
 
@@ -529,28 +529,28 @@ export function Hero() {
               </form>
 
               {/* Secondary action */}
-              <div className="flex flex-wrap items-center gap-4 text-xs text-gray-400">
-                <Link href="/browse" className="text-white hover:text-[#5b6bf7] font-semibold flex items-center gap-1 underline underline-offset-4 decoration-[#5b6bf7]">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs text-text-muted">
+                <Link href="/browse" className="text-text-primary hover:text-accent font-bold sm:font-semibold flex items-center gap-1 underline underline-offset-4 decoration-accent">
                   Browse 1,200+ Courses & Books →
                 </Link>
-                <span>•</span>
-                <span className="text-gray-400">No credit card required</span>
+                <span className="text-text-muted">•</span>
+                <span className="text-text-muted font-medium">No credit card required</span>
               </div>
             </motion.div>
 
             {/* Trust indicators */}
-            <motion.div variants={fadeUp} className="mt-8 flex items-center gap-6 text-xs text-gray-400 flex-wrap">
-              <div className="flex items-center gap-2 bg-[#14141c] border border-white/10 px-3.5 py-2 rounded-xl">
-                <Shield className="h-4 w-4 text-[#5b6bf7]" />
-                <span className="text-white font-medium">AI Verified Quality</span>
+            <motion.div variants={fadeUp} className="mt-8 flex items-center gap-3 sm:gap-6 text-xs text-text-secondary flex-wrap">
+              <div className="flex items-center gap-2 bg-[#14141c] border border-white/10 px-3 py-2 rounded-xl">
+                <Shield className="h-4 w-4 text-accent shrink-0" />
+                <span className="text-text-primary font-semibold text-[11px] sm:text-xs">AI Verified Quality</span>
               </div>
-              <div className="flex items-center gap-2 bg-[#14141c] border border-white/10 px-3.5 py-2 rounded-xl">
-                <Star className="h-4 w-4 text-amber-400 fill-amber-400" />
-                <span className="text-white font-medium">4.9/5 Student Rating</span>
+              <div className="flex items-center gap-2 bg-[#14141c] border border-white/10 px-3 py-2 rounded-xl">
+                <Star className="h-4 w-4 text-amber-400 fill-amber-400 shrink-0" />
+                <span className="text-text-primary font-semibold text-[11px] sm:text-xs">4.9/5 Student Rating</span>
               </div>
-              <div className="flex items-center gap-2 bg-[#14141c] border border-white/10 px-3.5 py-2 rounded-xl">
-                <Award className="h-4 w-4 text-emerald-400" />
-                <span className="text-white font-medium">Instant Certificates</span>
+              <div className="flex items-center gap-2 bg-[#14141c] border border-white/10 px-3 py-2 rounded-xl">
+                <Award className="h-4 w-4 text-emerald-400 shrink-0" />
+                <span className="text-text-primary font-semibold text-[11px] sm:text-xs">Instant Certificates</span>
               </div>
             </motion.div>
 
