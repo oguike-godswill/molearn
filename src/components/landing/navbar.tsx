@@ -646,9 +646,9 @@ export function Navbar() {
         )}
       >
         <AnnouncementBar />
-        <div className="grid grid-cols-3 items-center px-4 py-3">
+        <div className="flex items-center justify-between px-4 py-3 md:grid md:grid-cols-3">
           {/* Left: Logo + Theme */}
-          <div className="justify-self-start flex items-center gap-3">
+          <div className="flex items-center gap-3">
             <Link
               href="/"
               onMouseEnter={() => setLogoHovered(true)}
@@ -735,7 +735,7 @@ export function Navbar() {
           </nav>
 
           {/* Right: Actions */}
-          <div className="justify-self-end flex items-center gap-1">
+          <div className="flex items-center gap-1 md:justify-self-end">
             {/* Search */}
             <button
               onClick={() => setSearchOpen(true)}
