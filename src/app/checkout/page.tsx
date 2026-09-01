@@ -37,7 +37,7 @@ export default function CheckoutPage() {
         <div className="border-b border-border/40">
           <div className="w-full px-4 h-16 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2 text-lg font-black tracking-tight" style={{ fontFamily: "var(--font-logo)" }}>
-              <BookOpen className="h-4 w-4 text-accent" /> molearn
+              <BookOpen className="h-4 w-4 text-accent" /> mojetech
             </Link>
           </div>
         </div>
@@ -58,7 +58,7 @@ export default function CheckoutPage() {
       <div className="border-b border-border/40">
         <div className="w-full px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 text-lg font-black tracking-tight" style={{ fontFamily: "var(--font-logo)" }}>
-            <BookOpen className="h-4 w-4 text-accent" /> molearn
+            <BookOpen className="h-4 w-4 text-accent" /> mojetech
           </Link>
           <div className="flex items-center gap-2 text-xs text-text-muted">
             <Lock className="h-3 w-3 text-emerald-400" />
@@ -67,12 +67,12 @@ export default function CheckoutPage() {
         </div>
       </div>
 
-      <div className="w-full px-4 py-8">
+      <div className="w-full px-4 py-6 sm:py-8">
         <button onClick={() => router.back()} className="flex items-center gap-1.5 text-sm text-text-secondary hover:text-text-primary transition-colors mb-6">
           <ArrowLeft className="h-4 w-4" /> Back
         </button>
 
-        <div className="grid gap-8 lg:grid-cols-[1fr_380px]">
+        <div className="grid gap-6 lg:gap-8 lg:grid-cols-[1fr_380px]">
           <div className="space-y-6">
             <h1 className="text-2xl font-bold tracking-tight text-text-primary">Checkout</h1>
 
@@ -131,7 +131,7 @@ export default function CheckoutPage() {
           </div>
 
           <div className="space-y-4">
-            <div className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl p-6 sticky top-24">
+            <div className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl p-5 sm:p-6 lg:sticky top-24">
               <h2 className="text-sm font-semibold text-text-primary mb-4">Order summary ({items.length} item{items.length !== 1 ? "s" : ""})</h2>
               <div className="space-y-3 pb-4 border-b border-border/40">
                 {items.map((item) => (

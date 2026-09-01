@@ -40,7 +40,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem("molearn-cart")
+      const stored = localStorage.getItem("mojetech-cart")
       if (stored) {
         const parsed = JSON.parse(stored)
         if (Array.isArray(parsed)) setItems(parsed)
@@ -49,7 +49,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
-    localStorage.setItem("molearn-cart", JSON.stringify(items))
+    localStorage.setItem("mojetech-cart", JSON.stringify(items))
   }, [items])
 
   const addItem = useCallback((item: CartItem) => {

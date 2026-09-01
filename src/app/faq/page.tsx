@@ -48,10 +48,10 @@ const faqCategories = [
     title: "Platform",
     color: "#eab308",
     items: [
-      { q: "Is Molearn free to join?", a: "Yes, creating an account is completely free. You only pay when you purchase a course. Teachers can join and publish for free." },
+      { q: "Is mojetech free to join?", a: "Yes, creating an account is completely free. You only pay when you purchase a course. Teachers can join and publish for free." },
       { q: "How does the review system work?", a: "Students who purchase a course can leave a rating (1-5 stars) and a written review. Reviews help other students make informed decisions." },
       { q: "Can I access courses offline?", a: "Video courses can be downloaded for offline viewing through our mobile app. E-books are available as PDF downloads for offline reading." },
-      { q: "How do I contact support?", a: "You can reach our support team at support@molearn.com or through the live chat widget in your dashboard. We typically respond within 24 hours." },
+      { q: "How do I contact support?", a: "You can reach our support team at support@mojetech.com or through the live chat widget in your dashboard. We typically respond within 24 hours." },
     ],
   },
 ]
@@ -70,7 +70,7 @@ export default function FaqPage() {
     : faqCategories
 
   return (
-    <div className="min-h-screen bg-[#0d0d0d] flex flex-col">
+    <div className="min-h-screen bg-bg-primary flex flex-col">
       <Suspense fallback={null}>
         <Navbar />
       </Suspense>
@@ -78,23 +78,23 @@ export default function FaqPage() {
       <main className="flex-1">
         {/* Hero */}
         <div className="relative overflow-hidden border-b border-white/5">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#5b6bf7]/5 to-transparent pointer-events-none" />
-          <div className="max-w-4xl mx-auto px-4 pt-24 pb-16 text-center">
+          <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent pointer-events-none" />
+          <div className="max-w-4xl mx-auto px-4 pt-28 pb-16 text-center">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#5b6bf7]/10 text-[#5b6bf7] border border-[#5b6bf7]/20 mb-5">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-accent/10 text-accent border border-accent/20 mb-5">
                 Help Center
               </span>
-              <h1 className="text-5xl font-extrabold text-white tracking-tight leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
                 Frequently Asked<br />
-                <span className="text-[#5b6bf7]">Questions</span>
+                <span className="text-accent">Questions</span>
               </h1>
-              <p className="mt-5 text-lg text-gray-400 max-w-xl mx-auto leading-relaxed">
-                Find answers to common questions about Molearn. Can&apos;t find what you&apos;re looking for?{" "}
-                <Link href="/contact" className="text-[#5b6bf7] hover:underline">Contact support</Link>.
+              <p className="mt-5 text-sm sm:text-lg text-gray-400 max-w-xl mx-auto leading-relaxed">
+                Find answers to common questions about mojetech. Can&apos;t find what you&apos;re looking for?{" "}
+                <Link href="/contact" className="text-accent hover:underline">Contact support</Link>.
               </p>
             </motion.div>
 
@@ -104,7 +104,7 @@ export default function FaqPage() {
                 onClick={() => setActiveCategory(null)}
                 className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-all cursor-pointer ${
                   activeCategory === null
-                    ? "bg-[#5b6bf7] border-[#5b6bf7] text-white"
+                    ? "bg-accent border-accent text-white"
                     : "bg-white/5 border-white/10 text-gray-400 hover:text-white hover:border-white/20"
                 }`}
               >
@@ -170,11 +170,11 @@ export default function FaqPage() {
                         </span>
                         <div
                           className={`h-6 w-6 rounded-full flex items-center justify-center shrink-0 transition-all ${
-                            isOpen ? "bg-[#5b6bf7]/20" : "bg-white/5"
+                            isOpen ? "bg-accent/20" : "bg-white/5"
                           }`}
                         >
                           <ChevronDown
-                            className={`h-3.5 w-3.5 transition-transform ${isOpen ? "rotate-180 text-[#5b6bf7]" : "text-gray-600"}`}
+                            className={`h-3.5 w-3.5 transition-transform ${isOpen ? "rotate-180 text-accent" : "text-gray-600"}`}
                           />
                         </div>
                       </button>
@@ -202,7 +202,7 @@ export default function FaqPage() {
 
         {/* CTA */}
         <div className="max-w-4xl mx-auto px-4 pb-20">
-          <div className="rounded-2xl border border-white/5 bg-gradient-to-br from-[#5b6bf7]/10 to-transparent p-10 text-center">
+          <div className="rounded-2xl border border-white/5 bg-gradient-to-br from-accent/10 to-transparent p-8 sm:p-10 text-center">
             <h3 className="text-2xl font-bold text-white">Still have questions?</h3>
             <p className="mt-2 text-gray-400 text-sm">Our support team is here to help you 24/7.</p>
             <div className="mt-6 flex items-center justify-center gap-3">
@@ -221,3 +221,4 @@ export default function FaqPage() {
     </div>
   )
 }
+

@@ -168,7 +168,7 @@ export default function BrowsePage() {
 
         {/* Search + toolbar */}
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
-          <div className="relative flex-1 max-w-md">
+          <div className="relative flex-1 max-w-full sm:max-w-md">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" />
             <Input placeholder="Search tutorials and books..." className="pl-10" value={search} onChange={(e) => setSearch(e.target.value)} />
             {search && (
@@ -177,7 +177,7 @@ export default function BrowsePage() {
               </button>
             )}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             {/* Sort */}
             <div className="relative">
               <button onClick={() => setShowSort(!showSort)} className="flex items-center gap-1.5 h-10 px-3 rounded-xl border border-border/60 bg-bg-secondary text-sm text-text-secondary hover:text-text-primary transition-colors">
@@ -217,10 +217,10 @@ export default function BrowsePage() {
         {/* Expandable filters */}
         {showFilters && (
           <div className="mb-6 p-4 bg-bg-secondary/30 border border-border/60 rounded-xl">
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4">
               <div>
                 <label className="text-xs font-medium text-text-secondary block mb-1.5">Type</label>
-                <div className="flex gap-1.5">
+                <div className="flex gap-1.5 flex-wrap">
                   {[{ label: "All", value: "all" as const }, { label: "Video", value: "VIDEO" as const }, { label: "Book", value: "BOOK" as const }].map((t) => (
                     <button key={t.value} onClick={() => setTypeFilter(t.value)} className={`px-3 py-1.5 text-xs rounded-lg border transition-colors ${typeFilter === t.value ? "bg-accent/10 border-accent/30 text-accent" : "border-border/60 text-text-secondary hover:border-border"}`}>
                       {t.label}
@@ -230,7 +230,7 @@ export default function BrowsePage() {
               </div>
               <div>
                 <label className="text-xs font-medium text-text-secondary block mb-1.5">Level</label>
-                <div className="flex gap-1.5">
+                <div className="flex gap-1.5 flex-wrap">
                   {levels.map((l) => (
                     <button key={l} onClick={() => setLevelFilter(l)} className={`px-3 py-1.5 text-xs rounded-lg border transition-colors ${levelFilter === l ? "bg-accent/10 border-accent/30 text-accent" : "border-border/60 text-text-secondary hover:border-border"}`}>
                       {l}
@@ -243,12 +243,12 @@ export default function BrowsePage() {
         )}
 
         {/* Categories */}
-        <div className="mb-8 flex items-center gap-2 flex-wrap">
+        <div className="mb-8 flex items-center gap-2 overflow-x-auto scrollbar-hide pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap">
           {categories.map((cat) => (
             <button
               key={cat.name}
               onClick={() => setActiveCategory(cat.name)}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors whitespace-nowrap ${
                 activeCategory === cat.name
                   ? "bg-accent text-white"
                   : "bg-bg-elevated text-text-secondary border border-border hover:border-border-hover"
@@ -270,7 +270,7 @@ export default function BrowsePage() {
         {viewMode === "grid" ? (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((product) => (
-              <div key={product.id} className="border border-border bg-bg-secondary flex flex-col group">
+              <div key={product.id} className="border border-border bg-bg-secondary rounded-xl overflow-hidden flex flex-col group">
                 <Link href={`/browse/${product.id}`}>
                   <div className="relative aspect-video bg-bg-elevated overflow-hidden">
                     <img src={product.image} alt={product.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
@@ -311,8 +311,8 @@ export default function BrowsePage() {
           /* List view */
           <div className="space-y-3">
             {filtered.map((product) => (
-              <div key={product.id} className="border border-border bg-bg-secondary flex group">
-                <Link href={`/browse/${product.id}`} className="w-48 shrink-0">
+              <div key={product.id} className="border border-border bg-bg-secondary rounded-xl overflow-hidden flex flex-col sm:flex-row group">
+                <Link href={`/browse/${product.id}`} className="w-full sm:w-40 md:w-48 shrink-0">
                   <div className="relative aspect-video h-full bg-bg-elevated overflow-hidden">
                     <img src={product.image} alt={product.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                     {product.type === "VIDEO" && (

@@ -1,125 +1,167 @@
 "use client"
 
+import { useState } from "react"
+import { motion } from "framer-motion"
 import { DashboardLayout, DashboardHeader, StatCard } from "@/components/dashboard/layout"
-import { Users, BookOpen, DollarSign, TrendingUp, ShieldCheck, Star, MoreHorizontal } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import {
+  Users, GraduationCap, DollarSign, MessageSquare, Plus, BookOpen,
+  Eye, Settings, TrendingUp, ArrowRight, Clock, UserPlus, CreditCard,
+  Star, AlertCircle, CheckCircle,
+} from "lucide-react"
+import Link from "next/link"
 
-const recentUsers = [
-  { id: "1", name: "Sarah Chen", email: "teacher@molearn.com", role: "TEACHER", products: 8, joined: "Jan 2026" },
-  { id: "2", name: "Marcus Rivera", email: "agent@molearn.com", role: "AGENT", reviews: 47, joined: "Feb 2026" },
-  { id: "3", name: "Emily Watson", email: "student@molearn.com", role: "STUDENT", enrolled: 4, joined: "Mar 2026" },
-  { id: "4", name: "Mike Johnson", email: "mike@example.com", role: "TEACHER", products: 3, joined: "Apr 2026" },
-  { id: "5", name: "Lisa Park", email: "lisa@example.com", role: "TEACHER", products: 5, joined: "Mar 2026" },
+const stats = [
+  { label: "Total Students", value: "156", change: "+12%", icon: GraduationCap },
+  { label: "Active Cohorts", value: "3", change: "+1", icon: Users },
+  { label: "Revenue This Month", value: "$12,450", change: "+18%", icon: DollarSign },
+  { label: "Pending Inquiries", value: "8", change: "-2", icon: MessageSquare },
 ]
 
-const platformStats = [
-  { label: "Total Users", value: "4,892", change: "+12%", icon: Users },
-  { label: "Total Products", value: "142", change: "+8%", icon: BookOpen },
-  { label: "Total Revenue", value: "$284,500", change: "+22%", icon: DollarSign },
-  { label: "Avg. Rating", value: "4.7", icon: Star },
+const recentActivity = [
+  { id: 1, icon: UserPlus, text: "New student enrolled in Cohort Alpha", time: "12 min ago", color: "text-blue-400" },
+  { id: 2, icon: CreditCard, text: "Payment received: $450 from Sarah Chen", time: "28 min ago", color: "text-emerald-400" },
+  { id: 3, icon: CheckCircle, text: "Course \"React Fundamentals\" published", time: "1 hour ago", color: "text-purple-400" },
+  { id: 4, icon: Star, text: "New 5-star review on \"Python Basics\"", time: "2 hours ago", color: "text-amber-400" },
+  { id: 5, icon: AlertCircle, text: "Inquiry from parent about Cohort Beta", time: "3 hours ago", color: "text-rose-400" },
 ]
+
+const quickActions = [
+  { label: "Create Cohort", icon: Plus, href: "/dashboard/admin/cohorts/new", color: "bg-blue-600" },
+  { label: "Add Course", icon: BookOpen, href: "/dashboard/admin/content", color: "bg-purple-600" },
+  { label: "View Inquiries", icon: Eye, href: "/dashboard/admin/inquiries", color: "bg-amber-600" },
+  { label: "Manage Users", icon: Settings, href: "/dashboard/admin/users", color: "bg-emerald-600" },
+]
+
+const revenueBars = [
+  { label: "Mon", value: 1200 },
+  { label: "Tue", value: 1800 },
+  { label: "Wed", value: 1400 },
+  { label: "Thu", value: 2200 },
+  { label: "Fri", value: 1900 },
+  { label: "Sat", value: 2600 },
+  { label: "Sun", value: 1350 },
+]
+
+const container = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.06 } },
+}
+
+const item = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0 },
+}
 
 export default function AdminDashboard() {
+  const maxRevenue = Math.max(...revenueBars.map((b) => b.value))
+
   return (
     <DashboardLayout role="ADMIN">
-      <DashboardHeader title="Admin Dashboard" description="Monitor platform health, users, and content quality." />
+      <DashboardHeader
+        title="Admin Dashboard"
+        description="Welcome back. Here's your platform overview."
+      />
 
       {/* Stats */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-8">
-        {platformStats.map((stat) => (
-          <StatCard key={stat.label} icon={stat.icon} label={stat.label} value={stat.value} change={stat.change} />
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-8"
+      >
+        {stats.map((stat) => (
+          <motion.div key={stat.label} variants={item}>
+            <StatCard icon={stat.icon} label={stat.label} value={stat.value} change={stat.change} />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
-      {/* Platform overview */}
+      {/* Quick Actions + Revenue Chart */}
       <div className="grid gap-6 lg:grid-cols-2 mb-8">
-        <div className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-text-primary mb-4">User Distribution</h3>
-          <div className="space-y-4">
-            {[
-              { label: "Students", value: 3800, color: "bg-blue-500", percentage: 78 },
-              { label: "Teachers", value: 720, color: "bg-purple-500", percentage: 15 },
-              { label: "Agents", value: 320, color: "bg-amber-500", percentage: 6 },
-              { label: "Admins", value: 52, color: "bg-emerald-500", percentage: 1 },
-            ].map((item) => (
-              <div key={item.label}>
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-2">
-                    <div className={`h-2.5 w-2.5 rounded-full ${item.color}`} />
-                    <span className="text-sm text-text-secondary">{item.label}</span>
-                  </div>
-                  <span className="text-sm font-medium text-text-primary">{item.value.toLocaleString()}</span>
+        {/* Quick Actions */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl p-5"
+        >
+          <h3 className="text-sm font-semibold text-text-primary mb-4">Quick Actions</h3>
+          <div className="grid grid-cols-2 gap-3">
+            {quickActions.map((action) => (
+              <Link
+                key={action.label}
+                href={action.href}
+                className="flex items-center gap-3 p-3.5 rounded-lg border border-border/40 hover:border-accent/40 hover:bg-bg-elevated/50 transition-all group"
+              >
+                <div className={`flex h-9 w-9 items-center justify-center rounded-lg ${action.color} shrink-0`}>
+                  <action.icon className="h-4 w-4 text-white" />
                 </div>
-                <div className="h-2 rounded-full bg-bg-elevated overflow-hidden">
-                  <div className={`h-full rounded-full ${item.color}`} style={{ width: `${item.percentage}%` }} />
-                </div>
+                <span className="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">
+                  {action.label}
+                </span>
+                <ArrowRight className="h-3.5 w-3.5 text-text-muted ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+              </Link>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Revenue Chart Placeholder */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl p-5"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-semibold text-text-primary">Revenue This Week</h3>
+            <TrendingUp className="h-4 w-4 text-emerald-400" />
+          </div>
+          <div className="flex items-end gap-2 h-44">
+            {revenueBars.map((bar) => (
+              <div key={bar.label} className="flex-1 flex flex-col items-center gap-1.5">
+                <span className="text-[10px] text-text-muted font-medium">${(bar.value / 1000).toFixed(1)}k</span>
+                <motion.div
+                  initial={{ height: 0 }}
+                  animate={{ height: `${(bar.value / maxRevenue) * 140}px` }}
+                  transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" as const }}
+                  className="w-full bg-accent/80 rounded-t-md hover:bg-accent transition-colors cursor-pointer"
+                />
+                <span className="text-[10px] text-text-muted">{bar.label}</span>
               </div>
             ))}
           </div>
-        </div>
-        <div className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-text-primary mb-4">Content Overview</h3>
-          <div className="space-y-4">
-            {[
-              { label: "Video Courses", value: 98, color: "bg-blue-500" },
-              { label: "Ebooks", value: 44, color: "bg-purple-500" },
-              { label: "Pending Review", value: 7, color: "bg-amber-500" },
-              { label: "Approved", value: 135, color: "bg-emerald-500" },
-              { label: "Rejected", value: 12, color: "bg-red-500" },
-            ].map((item) => (
-              <div key={item.label} className="flex items-center justify-between py-1">
-                <div className="flex items-center gap-2">
-                  <div className={`h-2.5 w-2.5 rounded-full ${item.color}`} />
-                  <span className="text-sm text-text-secondary">{item.label}</span>
-                </div>
-                <span className="text-sm font-medium text-text-primary">{item.value}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        </motion.div>
       </div>
 
-      {/* Recent Users */}
-      <div>
+      {/* Recent Activity */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+        className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl p-5"
+      >
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-text-primary">Recent Users</h2>
-          <button className="text-xs text-accent hover:underline">View all</button>
+          <h3 className="text-sm font-semibold text-text-primary">Recent Activity</h3>
+          <Clock className="h-4 w-4 text-text-muted" />
         </div>
-        <div className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl overflow-hidden">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border/40 text-left">
-                <th className="px-5 py-3 text-xs font-medium text-text-muted">Name</th>
-                <th className="px-5 py-3 text-xs font-medium text-text-muted">Email</th>
-                <th className="px-5 py-3 text-xs font-medium text-text-muted">Role</th>
-                <th className="px-5 py-3 text-xs font-medium text-text-muted">Joined</th>
-                <th className="px-5 py-3" />
-              </tr>
-            </thead>
-            <tbody>
-              {recentUsers.map((user) => (
-                <tr key={user.id} className="border-b border-border/20 last:border-0 hover:bg-bg-elevated/30 transition-colors">
-                  <td className="px-5 py-3.5 text-sm font-medium text-text-primary">{user.name}</td>
-                  <td className="px-5 py-3.5 text-text-secondary">{user.email}</td>
-                  <td className="px-5 py-3.5">
-                    <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
-                      user.role === "ADMIN" ? "bg-emerald-500/10 text-emerald-400" :
-                      user.role === "TEACHER" ? "bg-blue-500/10 text-blue-400" :
-                      user.role === "AGENT" ? "bg-amber-500/10 text-amber-400" :
-                      "bg-purple-500/10 text-purple-400"
-                    }`}>{user.role}</span>
-                  </td>
-                  <td className="px-5 py-3.5 text-text-secondary">{user.joined}</td>
-                  <td className="px-5 py-3.5">
-                    <button className="text-text-muted hover:text-text-primary transition-colors">
-                      <MoreHorizontal className="h-4 w-4" />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="space-y-0">
+          {recentActivity.map((event, i) => (
+            <div
+              key={event.id}
+              className={`flex items-start gap-3 py-3.5 ${i < recentActivity.length - 1 ? "border-b border-border/20" : ""}`}
+            >
+              <div className="p-1.5 rounded-lg bg-bg-elevated flex-shrink-0">
+                <event.icon className={`h-3.5 w-3.5 ${event.color}`} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm text-text-primary">{event.text}</p>
+                <span className="text-[10px] text-text-muted">{event.time}</span>
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
+      </motion.div>
     </DashboardLayout>
   )
 }

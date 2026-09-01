@@ -29,7 +29,7 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0d0d0d] flex flex-col">
+    <div className="min-h-screen bg-bg-primary flex flex-col">
       <Suspense fallback={null}>
         <Navbar />
       </Suspense>
@@ -37,21 +37,21 @@ export default function ContactPage() {
       <main className="flex-1">
         {/* Hero header */}
         <div className="relative overflow-hidden border-b border-white/5">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#5b6bf7]/10 via-[#5b6bf7]/5 to-transparent pointer-events-none" />
-          <div className="max-w-4xl mx-auto px-4 pt-24 pb-16 text-center">
+          <div className="absolute inset-0 bg-gradient-to-b from-accent/10 via-accent/5 to-transparent pointer-events-none" />
+          <div className="max-w-4xl mx-auto px-4 pt-28 pb-16 text-center">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#5b6bf7]/10 text-[#5b6bf7] border border-[#5b6bf7]/20 mb-5">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-accent/10 text-accent border border-accent/20 mb-5">
                 Contact & Support
               </span>
-              <h1 className="text-5xl font-extrabold text-white tracking-tight leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
                 We&apos;re here to{" "}
-                <span className="text-[#5b6bf7]">help</span>
+                <span className="text-accent">help</span>
               </h1>
-              <p className="mt-5 text-lg text-gray-400 max-w-xl mx-auto leading-relaxed">
+              <p className="mt-5 text-sm sm:text-lg text-gray-400 max-w-xl mx-auto leading-relaxed">
                 Have a question about courses, pricing, or becoming an instructor? Send us a message and we&apos;ll get back to you in under 24 hours.
               </p>
             </motion.div>
@@ -59,8 +59,8 @@ export default function ContactPage() {
         </div>
 
         {/* Main Content Grid */}
-        <div className="max-w-6xl mx-auto px-4 py-16">
-          <div className="grid lg:grid-cols-12 gap-12">
+        <div className="max-w-6xl mx-auto px-4 py-12 sm:py-16">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
             {/* Contact Form Column */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -109,7 +109,7 @@ export default function ContactPage() {
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="John Doe"
-                        className="w-full h-11 px-4 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder:text-gray-600 outline-none focus:border-[#5b6bf7] focus:ring-1 focus:ring-[#5b6bf7] transition-all"
+                        className="w-full h-11 px-4 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder:text-gray-600 outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all"
                       />
                     </div>
                     <div>
@@ -122,7 +122,7 @@ export default function ContactPage() {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="john@example.com"
-                        className="w-full h-11 px-4 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder:text-gray-600 outline-none focus:border-[#5b6bf7] focus:ring-1 focus:ring-[#5b6bf7] transition-all"
+                        className="w-full h-11 px-4 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder:text-gray-600 outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all"
                       />
                     </div>
                   </div>
@@ -134,7 +134,7 @@ export default function ContactPage() {
                     <select
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full h-11 px-4 rounded-xl border border-white/10 bg-[#141414] text-sm text-white outline-none focus:border-[#5b6bf7] focus:ring-1 focus:ring-[#5b6bf7] transition-all"
+                      className="w-full h-11 px-4 rounded-xl border border-white/10 bg-bg-secondary text-sm text-white outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all"
                     >
                       <option value="general">General Inquiry</option>
                       <option value="teaching">Becoming an Instructor</option>
@@ -154,14 +154,14 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="How can we help you?"
-                      className="w-full p-4 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder:text-gray-600 outline-none focus:border-[#5b6bf7] focus:ring-1 focus:ring-[#5b6bf7] transition-all resize-none"
+                      className="w-full p-4 rounded-xl border border-white/10 bg-white/5 text-sm text-white placeholder:text-gray-600 outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full h-12 bg-[#5b6bf7] hover:bg-[#4a5ae6] text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#5b6bf7]/20 disabled:opacity-50"
+                    className="w-full h-12 bg-accent hover:bg-accent-hover text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-accent/20 disabled:opacity-50"
                   >
                     {loading ? (
                       <span className="animate-pulse">Sending message...</span>
@@ -186,14 +186,14 @@ export default function ContactPage() {
               {/* Contact Cards */}
               <div className="space-y-4">
                 <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.02] flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-xl bg-[#5b6bf7]/10 border border-[#5b6bf7]/20 flex items-center justify-center shrink-0">
-                    <Mail className="h-5 w-5 text-[#5b6bf7]" />
+                  <div className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0">
+                    <Mail className="h-5 w-5 text-accent" />
                   </div>
                   <div>
                     <h3 className="text-base font-bold text-white">Email Us</h3>
                     <p className="text-xs text-gray-400 mt-1">Our support team replies within 24 hours.</p>
-                    <a href="mailto:support@molearn.com" className="text-sm font-medium text-[#5b6bf7] hover:underline mt-2 inline-block">
-                      support@molearn.com
+                    <a href="mailto:support@mojetech.com" className="text-sm font-medium text-accent hover:underline mt-2 inline-block">
+                      support@mojetech.com
                     </a>
                   </div>
                 </div>
@@ -224,9 +224,9 @@ export default function ContactPage() {
               </div>
 
               {/* FAQ Quick Link Card */}
-              <div className="p-6 rounded-2xl border border-white/5 bg-gradient-to-br from-[#5b6bf7]/10 via-purple-500/5 to-transparent">
+              <div className="p-6 rounded-2xl border border-white/5 bg-gradient-to-br from-accent/10 via-purple-500/5 to-transparent">
                 <div className="flex items-center gap-3 mb-2">
-                  <HelpCircle className="h-5 w-5 text-[#5b6bf7]" />
+                  <HelpCircle className="h-5 w-5 text-accent" />
                   <h3 className="text-base font-bold text-white">Looking for instant answers?</h3>
                 </div>
                 <p className="text-xs text-gray-400 leading-relaxed mb-4">
@@ -247,3 +247,4 @@ export default function ContactPage() {
     </div>
   )
 }
+

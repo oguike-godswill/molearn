@@ -324,8 +324,24 @@ export default function CourseDetailPage() {
                   </div>
                 </div>
 
+                {/* Thumbnail - mobile */}
+                <div className="mt-8 lg:hidden">
+                  <div className="relative aspect-video rounded-xl overflow-hidden border border-border/60 bg-bg-elevated shadow-lg">
+                    <img
+                      src={course.image}
+                      alt={course.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                      <div className="flex h-14 w-14 items-center justify-center bg-white/90 rounded-xl">
+                        <Play className="h-6 w-6 text-bg-primary ml-0.5" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Price and actions - mobile */}
-                <div className="mt-8 flex lg:hidden flex-col gap-4">
+                <div className="mt-6 flex lg:hidden flex-col gap-4">
                   <div className="flex items-baseline gap-3">
                     <span className="text-3xl font-bold text-text-primary">
                       ${(course.price / 100).toFixed(2)}

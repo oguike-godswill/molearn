@@ -451,7 +451,7 @@ function MobileDrawer({
   pathname: string
   searchParams: URLSearchParams
 }) {
-  const { data: session, status } = useSession()
+  const { data: session } = useSession()
   const user = session?.user
   const initials = user?.name?.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) || "U"
 
@@ -531,6 +531,8 @@ function MobileDrawer({
                 <div className="my-4 border-t border-border" />
                 <div className="mb-3 px-3 text-[11px] font-semibold uppercase tracking-widest text-text-muted">More</div>
                 {[
+                  { label: "Programs", href: "/programs", icon: GraduationCap },
+                  { label: "Community", href: "/community", icon: Users },
                   { label: "Teach on Molearn", href: "/teach", icon: GraduationCap },
                   { label: "How it Works", href: "/#how-it-works", icon: Sparkles },
                   { label: "Pricing", href: "/#pricing", icon: BarChart3 },
@@ -569,7 +571,7 @@ function MobileDrawer({
               </div>
 
               <div className="border-t border-border p-4 space-y-2">
-                {status === "loading" ? null : session ? (
+                {session ? (
                   <Button onClick={() => { onClose(); signOut() }} variant="secondary" size="sm" className="w-full justify-start gap-2">
                     <LogOut className="h-4 w-4" />Sign out
                   </Button>
@@ -609,7 +611,7 @@ export function Navbar() {
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
   const notifTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
   const avatarTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const { data: session, status } = useSession()
+  const { data: session } = useSession()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -712,6 +714,24 @@ export function Navbar() {
               </button>
               <AnimatePresence>{activeDropdown === "resources" && <ResourcesDropdown />}</AnimatePresence>
             </div>
+            <Link
+              href="/programs"
+              className={cn(
+                "px-3 py-2 text-sm rounded-lg transition-colors",
+                isActive("/programs", pathname, searchParams) ? "text-text-primary bg-bg-elevated" : "text-text-secondary hover:text-text-primary hover:bg-bg-elevated/50"
+              )}
+            >
+              Programs
+            </Link>
+            <Link
+              href="/community"
+              className={cn(
+                "px-3 py-2 text-sm rounded-lg transition-colors",
+                isActive("/community", pathname, searchParams) ? "text-text-primary bg-bg-elevated" : "text-text-secondary hover:text-text-primary hover:bg-bg-elevated/50"
+              )}
+            >
+              Community
+            </Link>
           </nav>
 
           {/* Right: Actions */}
@@ -765,7 +785,7 @@ export function Navbar() {
 
             {/* Auth */}
             <div className="hidden md:flex items-center gap-1.5 ml-1">
-              {status === "loading" ? null : session ? (
+              {session ? (
                 <div
                   className="relative"
                   onMouseEnter={() => { if (avatarTimeout.current) clearTimeout(avatarTimeout.current); setAvatarOpen(true) }}

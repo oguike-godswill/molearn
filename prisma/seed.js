@@ -152,6 +152,214 @@ async function main() {
     }
   }
 
+  // Seed programs
+  const programsData = [
+    {
+      title: "Digital Marketing Cohort",
+      slug: "digital-marketing-cohort",
+      track: "Marketing",
+      description: "Master digital marketing from strategy to execution. Learn SEO, social media, paid advertising, email marketing, and analytics.",
+      price: 19900,
+      duration: "12 weeks",
+      mode: "Cohort",
+      startDate: "March 3, 2026",
+      learningOutcomes: [
+        "Develop comprehensive digital marketing strategies",
+        "Execute social media campaigns across platforms",
+        "Set up and optimize paid advertising on Google and Meta",
+        "Build email marketing funnels that convert",
+        "Analyze campaign performance with Google Analytics",
+        "Create content that drives organic traffic and engagement",
+      ],
+      whoIsThisFor: [
+        "Aspiring digital marketers looking to break into the industry",
+        "Business owners wanting to grow their online presence",
+        "Professionals transitioning from traditional to digital marketing",
+      ],
+      mentorName: "Tunde Akinwale",
+      mentorRole: "Head of Digital Strategy, MojeTech",
+      mentorBio: "Tunde has over 8 years of experience running digital campaigns for brands like Flutterwave, Piggyvest, and Kuda. He has trained over 500 marketers across West Africa.",
+      curriculum: [
+        { week: "Week 1–2", title: "Foundations & Strategy", topics: ["Digital marketing landscape in Nigeria", "Setting SMART goals", "Audience research & personas", "Competitive analysis frameworks"], order: 0 },
+        { week: "Week 3–4", title: "SEO & Content Marketing", topics: ["Keyword research with free tools", "On-page & technical SEO basics", "Content planning & editorial calendars", "Writing for the web"], order: 1 },
+        { week: "Week 5–6", title: "Social Media Marketing", topics: ["Platform strategy (Instagram, TikTok, LinkedIn)", "Content formats & scheduling", "Community management", "Organic growth tactics"], order: 2 },
+        { week: "Week 7–8", title: "Paid Advertising", topics: ["Meta Ads Manager deep-dive", "Google Ads fundamentals", "Audience targeting & retargeting", "Budget allocation & bidding strategies"], order: 3 },
+        { week: "Week 9–10", title: "Email Marketing & Funnels", topics: ["Building an email list from scratch", "Welcome sequences & nurture flows", "A/B testing subject lines & CTAs", "Tools: Mailchimp, ConvertKit"], order: 4 },
+        { week: "Week 11–12", title: "Analytics & Capstone", topics: ["Google Analytics 4 setup & reporting", "Attribution models", "Building a campaign dashboard", "Capstone project presentation"], order: 5 },
+      ],
+      cohorts: [
+        { label: "Cohort 4", startDate: "March 3, 2026", endDate: "May 25, 2026", spots: 30, spotsLeft: 12 },
+        { label: "Cohort 5", startDate: "June 2, 2026", endDate: "August 24, 2026", spots: 30, spotsLeft: 30 },
+      ],
+    },
+    {
+      title: "Design Fundamentals",
+      slug: "design-fundamentals",
+      track: "Design",
+      description: "Learn color theory, typography, layout, and visual hierarchy through hands-on projects and critiques.",
+      price: 14900,
+      duration: "8 weeks",
+      mode: "Cohort",
+      startDate: "April 2026",
+      learningOutcomes: [
+        "Apply color theory and typography principles",
+        "Create wireframes and high-fidelity mockups",
+        "Conduct user research and usability testing",
+        "Build a professional design portfolio",
+      ],
+      whoIsThisFor: [
+        "Beginners interested in visual design",
+        "Career switchers moving into design",
+        "Freelancers wanting to improve their design skills",
+      ],
+      mentorName: "Amina Yusuf",
+      mentorRole: "Lead Designer, MojeTech",
+      mentorBio: "Amina has 6 years of experience in product design, having worked with startups across fintech and e-commerce. She is passionate about mentoring the next generation of African designers.",
+      curriculum: [
+        { week: "Week 1–2", title: "Design Principles", topics: ["Color theory", "Typography basics", "Layout & composition", "Visual hierarchy"], order: 0 },
+        { week: "Week 3–4", title: "Digital Design Tools", topics: ["Figma fundamentals", "Components & styles", "Prototyping basics", "Design systems intro"], order: 1 },
+        { week: "Week 5–6", title: "User Research", topics: ["User interviews", "Personas & journey maps", "Wireframing", "Usability testing"], order: 2 },
+        { week: "Week 7–8", title: "Portfolio Project", topics: ["End-to-end design project", "Case study writing", "Portfolio presentation", "Peer review"], order: 3 },
+      ],
+      cohorts: [
+        { label: "Cohort 1", startDate: "April 7, 2026", endDate: "May 31, 2026", spots: 25, spotsLeft: 18 },
+      ],
+    },
+    {
+      title: "Social Media Marketing",
+      slug: "social-media-marketing",
+      track: "Marketing",
+      description: "Build and manage social presence across platforms with content calendars, ads, and analytics.",
+      price: 4900,
+      duration: "Self-paced",
+      mode: "Self-paced",
+      learningOutcomes: [
+        "Create platform-specific content strategies",
+        "Manage social media advertising budgets",
+        "Analyze engagement metrics and optimize",
+      ],
+      whoIsThisFor: [
+        "Small business owners managing their own social media",
+        "Aspiring social media managers",
+      ],
+      mentorName: "Chidi Okonkwo",
+      mentorRole: "Social Media Strategist",
+      mentorBio: "Chidi has managed social accounts for brands reaching over 2 million followers combined.",
+      curriculum: [],
+      cohorts: [],
+    },
+    {
+      title: "UI/UX Design",
+      slug: "ui-ux-design",
+      track: "Design",
+      description: "From wireframes to high-fidelity prototypes—learn user research, interaction design, and usability testing.",
+      price: 4900,
+      duration: "Self-paced",
+      mode: "Self-paced",
+      learningOutcomes: [
+        "Conduct user research and create personas",
+        "Design responsive interfaces in Figma",
+        "Build interactive prototypes",
+      ],
+      whoIsThisFor: [
+        "Aspiring UI/UX designers",
+        "Developers wanting to improve design skills",
+      ],
+      mentorName: "Fatima Bello",
+      mentorRole: "UX Lead",
+      mentorBio: "Fatima has designed products used by millions across Africa and Europe.",
+      curriculum: [],
+      cohorts: [],
+    },
+    {
+      title: "Content Creation",
+      slug: "content-creation",
+      track: "Marketing",
+      description: "Produce compelling content across formats—blog posts, video scripts, newsletters, and social copy.",
+      price: 12900,
+      duration: "6 weeks",
+      mode: "Cohort",
+      startDate: "May 2026",
+      learningOutcomes: [
+        "Write compelling blog posts and articles",
+        "Create video scripts and storyboards",
+        "Build and manage email newsletters",
+      ],
+      whoIsThisFor: [
+        "Aspiring content creators",
+        "Marketers looking to improve writing skills",
+      ],
+      mentorName: "Ngozi Igwe",
+      mentorRole: "Content Strategist",
+      mentorBio: "Ngozi is a freelance content strategist who has worked with top fintech brands.",
+      curriculum: [],
+      cohorts: [
+        { label: "Cohort 1", startDate: "May 5, 2026", endDate: "June 15, 2026", spots: 20, spotsLeft: 20 },
+      ],
+    },
+    {
+      title: "Advanced Digital Strategy",
+      slug: "advanced-digital-strategy",
+      track: "Marketing",
+      description: "Develop end-to-end digital strategies covering brand positioning, funnel design, and growth frameworks.",
+      price: 24900,
+      duration: "10 weeks",
+      mode: "Cohort",
+      startDate: "June 2026",
+      learningOutcomes: [
+        "Develop comprehensive digital strategies",
+        "Design and optimize marketing funnels",
+        "Build growth frameworks for startups",
+      ],
+      whoIsThisFor: [
+        "Experienced marketers looking to level up",
+        "Startup founders building growth teams",
+      ],
+      mentorName: "Tunde Akinwale",
+      mentorRole: "Head of Digital Strategy, MojeTech",
+      mentorBio: "Tunde brings 8 years of digital strategy experience to this advanced program.",
+      curriculum: [],
+      cohorts: [
+        { label: "Cohort 1", startDate: "June 1, 2026", endDate: "August 10, 2026", spots: 20, spotsLeft: 20 },
+      ],
+    },
+  ]
+
+  for (const programData of programsData) {
+    const { curriculum, cohorts, ...programFields } = programData
+    const existing = await prisma.program.findUnique({ where: { slug: programFields.slug } })
+    if (!existing) {
+      const program = await prisma.program.create({
+        data: {
+          ...programFields,
+          curriculum: {
+            create: curriculum,
+          },
+          cohorts: {
+            create: cohorts,
+          },
+        },
+      })
+      console.log(`Created program: ${program.title}`)
+    }
+  }
+
+  // Seed testimonials
+  const testimonialsData = [
+    { name: "Ngozi Igwe", role: "Freelance Digital Marketer", quote: "MojeTech's Digital Marketing program changed my career trajectory. Within two months of graduating, I landed three retainer clients.", rating: 5, program: "Digital Marketing Cohort" },
+    { name: "Chukwuemeka Obi", role: "Growth Lead, Fintech Startup", quote: "I came in knowing nothing about paid ads. By week 8, I was running campaigns with real budgets and getting measurable results.", rating: 5, program: "Digital Marketing Cohort" },
+    { name: "Amina Yusuf", role: "E-commerce Business Owner", quote: "The ROI on this program is insane. I applied what I learned to my own business and tripled my online sales in three months.", rating: 5, program: "Digital Marketing Cohort" },
+    { name: "Kemi Adeyemi", role: "Product Designer at Kuda", quote: "The Design Fundamentals program gave me the foundation I needed to break into fintech design. The mentorship was invaluable.", rating: 5, program: "Design Fundamentals" },
+    { name: "David Mensah", role: "Freelance Designer", quote: "From zero design experience to landing my first client in 4 months. The hands-on projects made all the difference.", rating: 5, program: "Design Fundamentals" },
+  ]
+
+  for (const testimonial of testimonialsData) {
+    const existing = await prisma.testimonial.findFirst({ where: { name: testimonial.name, quote: testimonial.quote } })
+    if (!existing) {
+      await prisma.testimonial.create({ data: testimonial })
+    }
+  }
+
   console.log("Seed completed successfully!")
   console.log("---")
   console.log("Admin:   admin@molearn.com / password123")

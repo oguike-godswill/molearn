@@ -152,3 +152,97 @@ model Payout {
 
   createdAt      DateTime @default(now())
 }
+
+model Program {
+  id              String      @id @default(cuid())
+  title           String
+  slug            String      @unique
+  track           String
+  description     String
+  price           Int
+  duration        String
+  mode            String      @default("Cohort")
+  startDate       String?
+  image           String?
+  learningOutcomes String[]
+  whoIsThisFor    String[]
+  mentorName      String?
+  mentorRole      String?
+  mentorBio       String?
+  published       Boolean     @default(true)
+
+  cohorts         Cohort[]
+  applications    ProgramApplication[]
+  curriculum      CurriculumWeek[]
+
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model CurriculumWeek {
+  id        String   @id @default(cuid())
+  week      String
+  title     String
+  topics    String[]
+  order     Int      @default(0)
+
+  program   Program  @relation(fields: [programId], references: [id], onDelete: Cascade)
+  programId String
+
+  @@index([programId, order])
+}
+
+model Cohort {
+  id        String   @id @default(cuid())
+  label     String
+  startDate String
+  endDate   String
+  spots     Int      @default(30)
+  spotsLeft Int      @default(30)
+
+  program   Program  @relation(fields: [programId], references: [id], onDelete: Cascade)
+  programId String
+
+  applications ProgramApplication[]
+
+  createdAt DateTime @default(now())
+
+  @@index([programId])
+}
+
+model ProgramApplication {
+  id          String   @id @default(cuid())
+  firstName   String
+  lastName    String
+  email       String
+  phone       String?
+  experience  String
+  motivation  String
+  referral    String?
+  status      String   @default("PENDING")
+
+  program     Program  @relation(fields: [programId], references: [id], onDelete: Cascade)
+  programId   String
+
+  cohort      Cohort?  @relation(fields: [cohortId], references: [id], onDelete: SetNull)
+  cohortId    String?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([programId])
+  @@index([email])
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  quote     String
+  rating    Int      @default(5)
+  image     String?
+  program   String?
+  published Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+}

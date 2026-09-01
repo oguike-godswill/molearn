@@ -1,102 +1,116 @@
 "use client"
 
 import { DashboardLayout, DashboardHeader, StatCard } from "@/components/dashboard/layout"
-import { Clock, CheckCircle, XCircle, Star, Eye, ThumbsUp, AlertCircle } from "lucide-react"
+import { Users, GraduationCap, Clock, CalendarDays, BookOpen, ChevronRight } from "lucide-react"
 
-const pendingReviews = [
-  { id: "1", title: "Flutter Mobile Development", teacher: "Sarah Chen", submitted: "2 days ago", type: "VIDEO", price: 4499 },
-  { id: "2", title: "Advanced CSS Grid Layouts", teacher: "Mike Johnson", submitted: "5 days ago", type: "BOOK", price: 2499 },
-  { id: "3", title: "Rust Systems Programming", teacher: "Alex Rivera", submitted: "1 week ago", type: "VIDEO", price: 5999 },
+const activeCohorts = [
+  { id: "1", name: "Web Development Cohort 12", students: 24, startDate: "Jun 1, 2026", status: "In Progress" },
+  { id: "2", name: "Mobile App Development Cohort 5", students: 21, startDate: "Jul 10, 2026", status: "In Progress" },
 ]
 
-const reviewHistory = [
-  { id: "1", title: "React from Zero to Production", teacher: "Sarah Chen", verdict: "APPROVED", date: "Jun 28, 2026", rating: 4.8 },
-  { id: "2", title: "Advanced TypeScript Patterns", teacher: "Marcus Johnson", verdict: "APPROVED", date: "Jun 15, 2026", rating: 4.6 },
-  { id: "3", title: "Python for Data Science", teacher: "Sarah Chen", verdict: "APPROVED", date: "Jun 2, 2026", rating: 4.9 },
-  { id: "4", title: "Node.js Performance Guide", teacher: "Lisa Park", verdict: "REJECTED", date: "May 20, 2026", rating: 0 },
+const recentActivity = [
+  { id: "1", action: "Assignment submitted", student: "Amara Okafor", detail: "React Component Architecture", time: "2 hours ago" },
+  { id: "2", action: "Grade posted", student: "David Mensah", detail: "Node.js REST API — 88/100", time: "5 hours ago" },
+  { id: "3", action: "Session completed", student: "Fatima Bello", detail: "1-on-1 Mentoring Session", time: "Yesterday" },
+  { id: "4", action: "New enrollment", student: "Kwame Asante", detail: "Web Development Cohort 12", time: "Yesterday" },
+  { id: "5", action: "Assignment submitted", student: "Grace Adeyemi", detail: "CSS Grid Layout Challenge", time: "2 days ago" },
 ]
 
-export default function AgentDashboard() {
+const upcomingSessions = [
+  { id: "1", title: "Office Hours — Web Dev Cohort 12", date: "Tomorrow", time: "10:00 AM", type: "Group", students: 24 },
+  { id: "2", title: "1-on-1 with Amara Okafor", date: "Wed, Jul 30", time: "2:00 PM", type: "1-on-1", students: 1 },
+  { id: "3", title: "Code Review — Mobile Cohort 5", date: "Thu, Jul 31", time: "11:00 AM", type: "Group", students: 21 },
+]
+
+export default function MentorDashboard() {
   return (
     <DashboardLayout role="AGENT">
-      <DashboardHeader title="Agent Dashboard" description="Review and verify content quality across the platform." />
+      <DashboardHeader title="Mentor Dashboard" description="Manage your cohorts, review assignments, and track student progress." />
 
       {/* Stats */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-8">
-        <StatCard icon={Clock} label="Pending Reviews" value="3" color="bg-amber-500/10" />
-        <StatCard icon={CheckCircle} label="Approved This Month" value="12" change="+4" color="bg-emerald-500/10" />
-        <StatCard icon={XCircle} label="Rejected This Month" value="2" color="bg-red-500/10" />
-        <StatCard icon={Star} label="Avg. Content Rating" value="4.6" color="bg-blue-500/10" />
+        <StatCard icon={Users} label="Assigned Cohorts" value="2" color="bg-blue-500/10" />
+        <StatCard icon={GraduationCap} label="Total Students" value="45" change="+3" color="bg-emerald-500/10" />
+        <StatCard icon={Clock} label="Pending Reviews" value="12" color="bg-amber-500/10" />
+        <StatCard icon={CalendarDays} label="Sessions This Week" value="3" color="bg-purple-500/10" />
       </div>
 
-      {/* Quick actions */}
+      {/* Active Cohorts */}
       <div className="mb-8">
-        <h2 className="text-lg font-semibold text-text-primary mb-4">Pending Reviews</h2>
-        <div className="space-y-3">
-          {pendingReviews.map((review) => (
-            <div key={review.id} className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl p-5 flex items-center justify-between gap-4">
-              <div className="flex items-center gap-4 min-w-0">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10 shrink-0">
-                  <Clock className="h-5 w-5 text-amber-400" />
+        <h2 className="text-lg font-semibold text-text-primary mb-4">Active Cohorts</h2>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {activeCohorts.map((cohort) => (
+            <div key={cohort.id} className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl p-5 hover:border-accent/30 transition-colors">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 shrink-0">
+                    <BookOpen className="h-5 w-5 text-blue-400" />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-sm font-medium text-text-primary truncate">{cohort.name}</h3>
+                    <p className="text-xs text-text-muted mt-0.5">Started {cohort.startDate}</p>
+                  </div>
                 </div>
-                <div className="min-w-0">
-                  <h3 className="text-sm font-medium text-text-primary truncate">{review.title}</h3>
-                  <p className="text-xs text-text-muted mt-0.5">{review.teacher} · {review.type} · ${(review.price / 100).toFixed(2)} · Submitted {review.submitted}</p>
-                </div>
+                <ChevronRight className="h-4 w-4 text-text-muted shrink-0 mt-1" />
               </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <button className="h-8 px-3 rounded-lg bg-emerald-500/10 text-emerald-400 text-xs font-medium hover:bg-emerald-500/20 transition-colors flex items-center gap-1">
-                  <ThumbsUp className="h-3 w-3" /> Approve
-                </button>
-                <button className="h-8 px-3 rounded-lg bg-red-500/10 text-red-400 text-xs font-medium hover:bg-red-500/20 transition-colors flex items-center gap-1">
-                  <AlertCircle className="h-3 w-3" /> Reject
-                </button>
-                <button className="h-8 px-3 rounded-lg bg-bg-elevated text-text-secondary text-xs font-medium hover:text-text-primary transition-colors">
-                  <Eye className="h-3 w-3" />
-                </button>
+              <div className="flex items-center gap-4 mt-4 pt-3 border-t border-border/30">
+                <div className="flex items-center gap-1.5">
+                  <GraduationCap className="h-3.5 w-3.5 text-text-muted" />
+                  <span className="text-xs text-text-secondary">{cohort.students} students</span>
+                </div>
+                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400">{cohort.status}</span>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Review History */}
-      <div>
-        <h2 className="text-lg font-semibold text-text-primary mb-4">Review History</h2>
-        <div className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl overflow-hidden">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border/40 text-left">
-                <th className="px-5 py-3 text-xs font-medium text-text-muted">Product</th>
-                <th className="px-5 py-3 text-xs font-medium text-text-muted">Teacher</th>
-                <th className="px-5 py-3 text-xs font-medium text-text-muted">Date</th>
-                <th className="px-5 py-3 text-xs font-medium text-text-muted">Verdict</th>
-                <th className="px-5 py-3 text-xs font-medium text-text-muted">Rating</th>
-              </tr>
-            </thead>
-            <tbody>
-              {reviewHistory.map((r) => (
-                <tr key={r.id} className="border-b border-border/20 last:border-0 hover:bg-bg-elevated/30 transition-colors">
-                  <td className="px-5 py-3.5 text-sm font-medium text-text-primary">{r.title}</td>
-                  <td className="px-5 py-3.5 text-text-secondary">{r.teacher}</td>
-                  <td className="px-5 py-3.5 text-text-secondary">{r.date}</td>
-                  <td className="px-5 py-3.5">
-                    <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
-                      r.verdict === "APPROVED" ? "bg-emerald-500/10 text-emerald-400" : "bg-red-500/10 text-red-400"
-                    }`}>{r.verdict}</span>
-                  </td>
-                  <td className="px-5 py-3.5">
-                    {r.rating > 0 ? (
-                      <div className="flex items-center gap-1">
-                        <Star className="h-3 w-3 fill-yellow-500 text-yellow-500" />
-                        <span className="text-text-secondary">{r.rating}</span>
-                      </div>
-                    ) : <span className="text-text-muted">—</span>}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div className="grid gap-6 lg:grid-cols-2 mb-8">
+        {/* Recent Activity */}
+        <div>
+          <h2 className="text-lg font-semibold text-text-primary mb-4">Recent Activity</h2>
+          <div className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl divide-y divide-border/30">
+            {recentActivity.map((item) => (
+              <div key={item.id} className="flex items-start gap-3 p-4">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10 shrink-0 mt-0.5">
+                  <BookOpen className="h-4 w-4 text-accent" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm text-text-primary">
+                    <span className="font-medium">{item.action}</span>
+                    <span className="text-text-muted"> — </span>
+                    <span className="text-text-secondary">{item.student}</span>
+                  </p>
+                  <p className="text-xs text-text-muted mt-0.5 truncate">{item.detail}</p>
+                </div>
+                <span className="text-[10px] text-text-muted shrink-0 mt-0.5">{item.time}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Upcoming Sessions */}
+        <div>
+          <h2 className="text-lg font-semibold text-text-primary mb-4">Upcoming Sessions</h2>
+          <div className="space-y-3">
+            {upcomingSessions.map((session) => (
+              <div key={session.id} className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl p-4">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <h3 className="text-sm font-medium text-text-primary">{session.title}</h3>
+                    <p className="text-xs text-text-muted mt-1">{session.date} · {session.time}</p>
+                  </div>
+                  <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full shrink-0 ${
+                    session.type === "Group" ? "bg-blue-500/10 text-blue-400" : "bg-purple-500/10 text-purple-400"
+                  }`}>{session.type}</span>
+                </div>
+                <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-border/30">
+                  <GraduationCap className="h-3.5 w-3.5 text-text-muted" />
+                  <span className="text-xs text-text-secondary">{session.students} {session.students === 1 ? "student" : "students"}</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </DashboardLayout>

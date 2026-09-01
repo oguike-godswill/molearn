@@ -9,7 +9,7 @@ const testimonials = [
     role: "React Developer & Teacher",
     avatar: "SC",
     content:
-      "I've been teaching on molearn for 3 months. The agent review process actually helped me improve my content. Students love the quality, and I love the 80% cut. Last month I made more here than on any other platform.",
+      "I've been teaching on mojetech for 3 months. The agent review process actually helped me improve my content. Students love the quality, and I love the 80% cut. Last month I made more here than on any other platform.",
     rating: 5,
     detail: "2 courses published · $4,200 earned",
   },

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 @theme inline {
@@ -19,10 +20,15 @@
   --radius-2xl: 4px;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-urbanist: "Urbanist", sans-serif;
   --animate-fade-in: fade-in 0.5s ease-out forwards;
   --animate-fade-in-up: fade-in-up 0.5s ease-out forwards;
   --animate-shake: shake 0.4s ease-in-out;
   --animate-logo-pulse: logo-pulse 2.5s ease-in-out infinite;
+  --animate-fade-up: fade-up 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-fade-down: fade-down 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-scale-in: scale-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-scroll-logos: scroll-logos 20s linear infinite;
 }
 
 @keyframes fade-in {
@@ -46,6 +52,47 @@
   50% { box-shadow: 0 0 0 10px rgba(91, 107, 247, 0); }
 }
 
+@keyframes scroll-logos {
+  to { transform: translateX(-50%); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-down {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Nav underline hover */
+.nav-underline::after,
+.nav-underline-white::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.nav-underline::after { background: #000000; }
+.nav-underline-white::after { background: #ffffff; }
+
+.nav-underline:hover::after,
+.nav-underline-white:hover::after {
+  transform: scaleX(1);
+}
+
 body::after {
   content: "";
   position: fixed;
@@ -58,8 +105,17 @@ body::after {
   background-size: 300px 300px;
 }
 
-html {
-  scroll-behavior: smooth;
+html.lenis,
+html.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+html.lenis.lenis-smooth body {
+  overflow: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
 ::-webkit-scrollbar {
@@ -88,6 +144,28 @@ html {
     font-family: var(--font-sans), system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .safe-left {
+    padding-left: env(safe-area-inset-left);
+  }
+  .safe-right {
+    padding-right: env(safe-area-inset-right);
   }
 }
 

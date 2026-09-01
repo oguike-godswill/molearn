@@ -131,7 +131,7 @@ export default function ForgotPasswordPage() {
               <BookOpen className="h-[18px] w-[18px] text-white" />
             </div>
             <span className="text-xl font-black tracking-tight text-text-primary" style={{ fontFamily: "var(--font-logo)" }}>
-              molearn
+              mojetech
             </span>
           </Link>
 
@@ -164,7 +164,7 @@ export default function ForgotPasswordPage() {
                 <div className="h-2 w-2 rounded-full bg-border" />
               </div>
               <div className="text-xs text-text-muted">
-                &copy; {new Date().getFullYear()} molearn
+                &copy; {new Date().getFullYear()} mojetech
               </div>
             </div>
           </div>
@@ -179,7 +179,7 @@ export default function ForgotPasswordPage() {
               <div className="flex h-8 w-8 items-center justify-center bg-accent animate-logo-pulse">
                 <BookOpen className="h-4 w-4 text-white" />
               </div>
-              molearn
+              mojetech
             </Link>
           </div>
 

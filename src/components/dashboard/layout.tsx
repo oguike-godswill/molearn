@@ -1,6 +1,6 @@
 "use client"
 
-import { BookOpen, LayoutDashboard, BookMarked, BarChart3, Users, ShieldCheck, Settings, LogOut, ChevronLeft, ChevronRight, GraduationCap, DollarSign, Star, Search, Bell, TrendingUp, FileText, CheckCircle, Clock, XCircle } from "lucide-react"
+import { BookOpen, LayoutDashboard, BookMarked, BarChart3, Users, ShieldCheck, Settings, LogOut, ChevronLeft, ChevronRight, GraduationCap, DollarSign, Star, Search, Bell, TrendingUp, FileText, CheckCircle, Clock, XCircle, X, CalendarDays } from "lucide-react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
@@ -22,7 +22,7 @@ const roleLinks = {
   AGENT: [
     { label: "Dashboard", href: "/dashboard/agent", icon: LayoutDashboard },
     { label: "Pending Reviews", href: "/dashboard/agent/reviews", icon: Clock },
-    { label: "Review History", href: "/dashboard/agent/history", icon: CheckCircle },
+    { label: "Session History", href: "/dashboard/agent/history", icon: CalendarDays },
   ],
   ADMIN: [
     { label: "Dashboard", href: "/dashboard/admin", icon: LayoutDashboard },
@@ -37,18 +37,33 @@ const bottomLinks = [
   { label: "Settings", href: "/dashboard/settings", icon: Settings },
 ]
 
-export function DashboardSidebar({ role = "STUDENT" as "STUDENT" | "TEACHER" | "AGENT" | "ADMIN" }) {
+export function DashboardSidebar({ role = "STUDENT" as "STUDENT" | "TEACHER" | "AGENT" | "ADMIN", mobileOpen = false, onMobileClose }: { role?: "STUDENT" | "TEACHER" | "AGENT" | "ADMIN"; mobileOpen?: boolean; onMobileClose?: () => void }) {
   const [collapsed, setCollapsed] = useState(false)
   const pathname = usePathname()
   const links = roleLinks[role] || roleLinks.STUDENT
 
   return (
-    <aside
-      className={cn(
-        "fixed left-0 top-16 z-30 h-[calc(100vh-4rem)] border-r border-border/60 bg-bg-primary transition-all duration-300 flex flex-col",
-        collapsed ? "w-16" : "w-60"
+    <>
+      {/* Mobile overlay */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden" onClick={onMobileClose} />
       )}
-    >
+
+      {/* Sidebar */}
+      <aside
+        className={cn(
+          "fixed left-0 top-16 z-50 h-[calc(100vh-4rem)] border-r border-border/60 bg-bg-primary transition-all duration-300 flex flex-col",
+          collapsed ? "w-16" : "w-60",
+          "max-lg:fixed max-lg:top-16 max-lg:z-50",
+          mobileOpen ? "max-lg:translate-x-0" : "max-lg:-translate-x-full"
+        )}
+      >
+        {/* Mobile close button */}
+        <div className="flex lg:hidden items-center justify-end px-3 pt-3">
+          <button onClick={onMobileClose} className="p-1 text-text-muted hover:text-text-primary transition-colors">
+            <X className="h-4 w-4" />
+          </button>
+        </div>
       {/* Role header */}
       <div className={cn("flex items-center gap-3 px-4 h-14 border-b border-border/40", collapsed && "justify-center px-0")}>
         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10 shrink-0">
@@ -117,22 +132,23 @@ export function DashboardSidebar({ role = "STUDENT" as "STUDENT" | "TEACHER" | "
         </button>
       </div>
 
-      {/* Collapse toggle */}
+      {/* Collapse toggle — desktop only */}
       <button
         onClick={() => setCollapsed(!collapsed)}
-        className="absolute -right-3 top-20 flex h-6 w-6 items-center justify-center rounded-full border border-border/60 bg-bg-primary text-text-muted hover:text-text-primary transition-colors shadow-sm"
+        className="absolute -right-3 top-20 hidden lg:flex h-6 w-6 items-center justify-center rounded-full border border-border/60 bg-bg-primary text-text-muted hover:text-text-primary transition-colors shadow-sm"
       >
         {collapsed ? <ChevronRight className="h-3 w-3" /> : <ChevronLeft className="h-3 w-3" />}
       </button>
     </aside>
+    </>
   )
 }
 
 export function DashboardHeader({ title, description }: { title: string; description?: string }) {
   return (
-    <div className="flex items-center justify-between mb-8">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 sm:mb-8">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-text-primary">{title}</h1>
+        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-text-primary">{title}</h1>
         {description && <p className="mt-1 text-sm text-text-secondary">{description}</p>}
       </div>
       <div className="flex items-center gap-3">
@@ -165,12 +181,14 @@ export function StatCard({ icon: Icon, label, value, change, color }: { icon: an
 import { TopNavbar } from "@/components/dashboard/top-navbar"
 
 export function DashboardLayout({ children, role = "STUDENT" as "STUDENT" | "TEACHER" | "AGENT" | "ADMIN" }: { children: React.ReactNode; role?: "STUDENT" | "TEACHER" | "AGENT" | "ADMIN" }) {
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
+
   return (
     <div className="min-h-screen bg-bg-primary">
-      <TopNavbar />
-      <DashboardSidebar role={role} />
-      <main className="pl-60 pt-16 transition-all duration-300">
-        <div className="p-6 w-full">
+      <TopNavbar onMenuClick={() => setMobileSidebarOpen(true)} />
+      <DashboardSidebar role={role} mobileOpen={mobileSidebarOpen} onMobileClose={() => setMobileSidebarOpen(false)} />
+      <main className="lg:pl-60 pt-16 transition-all duration-300">
+        <div className="p-4 md:p-6 w-full">
           {children}
         </div>
       </main>

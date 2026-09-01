@@ -6,7 +6,7 @@ import { BookOpen, Bell, Search, User, LogOut, Settings, Menu } from "lucide-rea
 import { useState, useRef, useEffect } from "react"
 import { cn } from "@/lib/utils"
 
-export function TopNavbar() {
+export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
   const { data: session } = useSession()
   const [userMenuOpen, setUserMenuOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -34,17 +34,17 @@ export function TopNavbar() {
       <div className="flex h-full items-center justify-between px-4 md:px-6">
         {/* Left */}
         <div className="flex items-center gap-3">
-          <button className="flex h-9 w-9 items-center justify-center rounded-lg text-text-muted hover:text-text-primary hover:bg-bg-elevated transition-colors md:hidden">
+          <button onClick={onMenuClick} className="flex h-9 w-9 items-center justify-center rounded-lg text-text-muted hover:text-text-primary hover:bg-bg-elevated transition-colors md:hidden">
             <Menu className="h-5 w-5" />
           </button>
           <Link href="/" className="flex items-center gap-2 text-text-primary hover:text-accent transition-colors">
             <BookOpen className="h-6 w-6" />
-            <span className="text-lg font-bold tracking-tight">molearn</span>
+            <span className="text-lg font-bold tracking-tight">mojetech</span>
           </Link>
         </div>
 
         {/* Center */}
-        <div className="hidden sm:flex items-center flex-1 mx-8">
+        <div className="hidden sm:flex items-center flex-1 mx-4 md:mx-8">
           <div className="relative w-full">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-muted" />
             <input
@@ -57,6 +57,10 @@ export function TopNavbar() {
 
         {/* Right */}
         <div className="flex items-center gap-2">
+          {/* Mobile search icon */}
+          <button className="flex sm:hidden h-9 w-9 items-center justify-center rounded-lg text-text-muted hover:text-text-primary hover:bg-bg-elevated transition-colors">
+            <Search className="h-4 w-4" />
+          </button>
           <Link
             href="/dashboard/notifications"
             className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 text-text-muted hover:text-text-primary hover:border-border transition-all"

@@ -12,7 +12,7 @@ const faqs = [
   },
   {
     q: "How much can I earn?",
-    a: "Teachers on Molearn keep 70% of every sale. With our average course priced at $49 and over 500+ active teachers, top instructors earn $5,000+ monthly. Use the earnings calculator above to estimate your revenue."
+    a: "Teachers on mojetech keep 70% of every sale. With our average course priced at $49 and over 500+ active teachers, top instructors earn $5,000+ monthly. Use the earnings calculator above to estimate your revenue."
   },
   {
     q: "What kind of content can I publish?",
@@ -26,7 +26,7 @@ const faqs = [
 
 const benefits = [
   { icon: DollarSign, title: "Earn what you deserve", desc: "Keep 70% of every sale. Top teachers earn $5,000+ monthly with our growing student base." },
-  { icon: Globe, title: "Reach a global audience", desc: "Students from 120+ countries browse Molearn daily. Your knowledge can impact learners worldwide." },
+  { icon: Globe, title: "Reach a global audience", desc: "Students from 120+ countries browse mojetech daily. Your knowledge can impact learners worldwide." },
   { icon: Clock, title: "Flexible schedule", desc: "Create content on your own time. No deadlines, no minimum hours. Teach at your own pace." },
 ]
 
@@ -52,7 +52,7 @@ export default function TeachPage() {
         <div className="w-full flex items-center justify-between px-4 py-4">
           <Link href="/" className="flex items-center gap-2 text-lg font-black tracking-tight text-text-primary" style={{ fontFamily: "var(--font-logo)" }}>
             <BookOpen className="h-5 w-5 text-accent" />
-            molearn
+            mojetech
           </Link>
           <div className="flex items-center gap-3">
             <Link href="/login">
@@ -115,7 +115,7 @@ export default function TeachPage() {
       {/* Benefits */}
       <section className="border-t border-border/40 py-20">
         <div className="w-full px-4">
-          <h2 className="text-2xl font-bold text-text-primary text-center mb-2">Why teach on Molearn?</h2>
+          <h2 className="text-2xl font-bold text-text-primary text-center mb-2">Why teach on mojetech?</h2>
           <p className="text-sm text-text-secondary text-center mb-10">Built for creators, designed for success</p>
               <div className="grid gap-6 md:grid-cols-3 w-full">
             {benefits.map((b) => (

@@ -97,7 +97,7 @@ export function FeaturedCourses() {
           <Link
             key={course.id}
             href={`/browse/${course.id}`}
-            className="group flex-shrink-0 w-[300px] snap-start"
+            className="group flex-shrink-0 w-[280px] sm:w-[300px] snap-start"
           >
             <div className="bg-bg-secondary/60 backdrop-blur-sm border border-border/60 rounded-xl overflow-hidden hover:border-accent/20 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
               <div className="relative aspect-video bg-bg-elevated overflow-hidden">

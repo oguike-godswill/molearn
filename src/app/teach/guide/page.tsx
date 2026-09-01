@@ -59,7 +59,7 @@ export default function CreatorGuidePage() {
         <div className="w-full flex items-center justify-between px-4 py-4">
           <Link href="/" className="flex items-center gap-2 text-lg font-black tracking-tight text-text-primary" style={{ fontFamily: "var(--font-logo)" }}>
             <BookOpen className="h-5 w-5 text-accent" />
-            molearn
+            mojetech
           </Link>
           <Link href="/teach" className="flex items-center gap-1.5 text-sm text-text-secondary hover:text-text-primary transition-colors">
             <ArrowLeft className="h-4 w-4" />
@@ -71,7 +71,7 @@ export default function CreatorGuidePage() {
       <main className="w-full px-4 py-10">
         <div className="mb-10">
           <h1 className="text-2xl font-bold text-text-primary">Creator Guide</h1>
-          <p className="mt-2 text-sm text-text-secondary">Everything you need to know to create high-quality, successful courses on Molearn.</p>
+          <p className="mt-2 text-sm text-text-secondary">Everything you need to know to create high-quality, successful courses on mojetech.</p>
         </div>
 
         <div className="space-y-6">

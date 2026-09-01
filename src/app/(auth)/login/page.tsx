@@ -177,7 +177,7 @@ export default function LoginPage() {
               <BookOpen className="h-[18px] w-[18px] text-white" />
             </div>
             <span className="text-xl font-black tracking-tight text-text-primary" style={{ fontFamily: "var(--font-logo)" }}>
-              molearn
+              mojetech
             </span>
           </Link>
 
@@ -213,7 +213,7 @@ export default function LoginPage() {
                 <div className="h-2 w-2 rounded-full bg-border" />
               </div>
               <div className="text-xs text-text-muted">
-                &copy; {new Date().getFullYear()} molearn
+                &copy; {new Date().getFullYear()} mojetech
               </div>
             </div>
           </div>
@@ -221,18 +221,18 @@ export default function LoginPage() {
       </div>
 
       {/* Right */}
-      <div className="flex-1 flex items-center justify-center px-8 py-12 animate-fade-in">
+      <div className="flex-1 flex items-center justify-center px-4 sm:px-8 py-8 sm:py-12 animate-fade-in">
         <div className="w-full max-w-sm">
           <div className="lg:hidden mb-6 animate-fade-in-up">
             <Link href="/" className="inline-flex items-center gap-2 text-lg font-black tracking-tight" style={{ fontFamily: "var(--font-logo)" }}>
               <div className="flex h-8 w-8 items-center justify-center bg-accent animate-logo-pulse">
                 <BookOpen className="h-4 w-4 text-white" />
               </div>
-              molearn
+              mojetech
             </Link>
           </div>
 
-          <div className="lg:hidden relative h-28 overflow-hidden mb-6 rounded border border-border animate-fade-in-up">
+          <div className="lg:hidden relative h-24 sm:h-28 overflow-hidden mb-6 rounded border border-border animate-fade-in-up">
             <img
               src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80"
               alt=""
@@ -241,14 +241,14 @@ export default function LoginPage() {
             <div className="absolute inset-0 bg-gradient-to-r from-bg-secondary/95 to-transparent" />
             <div className="relative z-10 h-full flex flex-col justify-center px-5">
               <p className="text-xs font-medium text-accent tracking-widest uppercase">{greeting()}</p>
-              <p className="text-sm font-medium text-text-primary mt-0.5">Welcome back to molearn</p>
+              <p className="text-sm font-medium text-text-primary mt-0.5">Welcome back to mojetech</p>
             </div>
           </div>
 
           <div className="mb-6 animate-fade-in-up">
             <h1 className="text-2xl font-semibold text-text-primary">Sign in</h1>
             <p className="mt-2 text-sm text-text-secondary">
-              New to molearn?{" "}
+              New to mojetech?{" "}
               <Link href="/register" className="text-accent hover:text-accent-hover font-medium">
                 Create an account
               </Link>

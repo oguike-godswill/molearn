@@ -30,9 +30,9 @@ export default function SettingsPage() {
         <p className="text-sm text-text-secondary mt-1">Manage your account settings and preferences</p>
       </div>
 
-      <div className="flex gap-6">
+      <div className="flex flex-col lg:flex-row gap-6">
         {/* Sidebar tabs */}
-        <div className="w-48 shrink-0 space-y-1">
+        <div className="flex lg:flex-col gap-1 w-full lg:w-48 lg:shrink-0 overflow-x-auto pb-2 lg:pb-0">
           {tabs.map((tab) => (
             <button
               key={tab.id}

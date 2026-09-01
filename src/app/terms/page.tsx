@@ -12,25 +12,25 @@ const sections = [
     id: "introduction",
     icon: FileText,
     title: "Introduction",
-    content: "Welcome to Molearn. By accessing or using our platform, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you may not use our services. Molearn is a marketplace that connects students with teachers for the sale and purchase of educational content including video courses and e-books.",
+    content: "Welcome to mojetech. By accessing or using our platform, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you may not use our services. mojetech is a marketplace that connects students with teachers for the sale and purchase of educational content including video courses and e-books.",
   },
   {
     id: "account-terms",
     icon: Shield,
     title: "Account Terms",
-    content: "You must be at least 13 years old to create an account on Molearn. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to provide accurate, current, and complete information during registration and to update your information to keep it accurate. Molearn reserves the right to suspend or terminate accounts that violate these terms or engage in fraudulent activity.",
+    content: "You must be at least 13 years old to create an account on mojetech. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to provide accurate, current, and complete information during registration and to update your information to keep it accurate. mojetech reserves the right to suspend or terminate accounts that violate these terms or engage in fraudulent activity.",
   },
   {
     id: "payment-terms",
     icon: CreditCard,
     title: "Payment Terms",
-    content: "All prices on Molearn are listed in US Dollars (USD). Students agree to pay all fees associated with course purchases. Teachers receive 70% of the net revenue from each sale of their content. Payouts are processed monthly on the 15th for the previous month's earnings, with a minimum payout threshold of $50. Molearn uses third-party payment processors. We do not store full credit card details on our servers.",
+    content: "All prices on mojetech are listed in US Dollars (USD). Students agree to pay all fees associated with course purchases. Teachers receive 70% of the net revenue from each sale of their content. Payouts are processed monthly on the 15th for the previous month's earnings, with a minimum payout threshold of $50. mojetech uses third-party payment processors. We do not store full credit card details on our servers.",
   },
   {
     id: "content-rights",
     icon: Scale,
     title: "Content Rights",
-    content: "Teachers retain full ownership of the content they publish on Molearn. By publishing content, you grant Molearn a non-exclusive, worldwide license to host, distribute, and promote your content on the platform. Students purchase a license to access content for personal, non-commercial use. Redistribution, resale, or sharing of purchased content outside the platform is strictly prohibited and may result in account termination.",
+    content: "Teachers retain full ownership of the content they publish on mojetech. By publishing content, you grant mojetech a non-exclusive, worldwide license to host, distribute, and promote your content on the platform. Students purchase a license to access content for personal, non-commercial use. Redistribution, resale, or sharing of purchased content outside the platform is strictly prohibited and may result in account termination.",
   },
   {
     id: "refund-policy",
@@ -42,7 +42,7 @@ const sections = [
     id: "termination",
     icon: AlertTriangle,
     title: "Termination",
-    content: "Molearn reserves the right to suspend or terminate your account at any time for violations of these terms, fraudulent activity, or other conduct that we deem harmful to the platform or its users. Upon termination, your right to access purchased content may be revoked. You may delete your account at any time through your dashboard settings. Certain provisions of these terms survive termination, including content rights and payment obligations.",
+    content: "mojetech reserves the right to suspend or terminate your account at any time for violations of these terms, fraudulent activity, or other conduct that we deem harmful to the platform or its users. Upon termination, your right to access purchased content may be revoked. You may delete your account at any time through your dashboard settings. Certain provisions of these terms survive termination, including content rights and payment obligations.",
   },
 ]
 
@@ -57,7 +57,7 @@ export default function TermsPage() {
         {/* Hero */}
         <div className="relative overflow-hidden border-b border-white/5">
           <div className="absolute inset-0 bg-gradient-to-b from-[#5b6bf7]/5 to-transparent pointer-events-none" />
-          <div className="max-w-4xl mx-auto px-4 pt-24 pb-16 text-center">
+          <div className="max-w-4xl mx-auto px-4 pt-28 pb-16 text-center">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -66,7 +66,7 @@ export default function TermsPage() {
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#5b6bf7]/10 text-[#5b6bf7] border border-[#5b6bf7]/20 mb-5">
                 Legal
               </span>
-              <h1 className="text-5xl font-extrabold text-white tracking-tight leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
                 Terms of{" "}
                 <span className="text-[#5b6bf7]">Service</span>
               </h1>
@@ -128,7 +128,7 @@ export default function TermsPage() {
             <p className="mt-2 text-gray-400 text-sm">Our legal team is happy to clarify anything.</p>
             <div className="mt-5 flex items-center justify-center gap-3">
               <a
-                href="mailto:legal@molearn.com"
+                href="mailto:legal@mojetech.com"
                 className="h-10 px-5 bg-[#5b6bf7] hover:bg-[#4a5ae6] text-white text-sm font-semibold rounded-lg transition-colors inline-flex items-center gap-2"
               >
                 Email legal team
@@ -145,3 +145,4 @@ export default function TermsPage() {
     </div>
   )
 }
+

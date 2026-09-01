@@ -34,7 +34,7 @@ const sections = [
     icon: Cookie,
     title: "Cookies",
     badge: "Tracking",
-    content: "Molearn uses cookies and similar technologies to authenticate users, remember preferences, and analyze platform usage. Essential cookies are required for the platform to function properly. We also use analytics cookies to understand how users interact with our platform. You can control cookie preferences through your browser settings, though disabling certain cookies may affect platform functionality.",
+    content: "mojetech uses cookies and similar technologies to authenticate users, remember preferences, and analyze platform usage. Essential cookies are required for the platform to function properly. We also use analytics cookies to understand how users interact with our platform. You can control cookie preferences through your browser settings, though disabling certain cookies may affect platform functionality.",
   },
   {
     id: "security",
@@ -48,14 +48,14 @@ const sections = [
     icon: UserCheck,
     title: "Your Rights",
     badge: "Control",
-    content: "You have the right to access, correct, or delete your personal information at any time through your account settings. You can export your data in a machine-readable format. You may also request that we restrict or object to certain processing of your data. To exercise these rights, contact us at privacy@molearn.com. We will respond to verified requests within 30 days as required by applicable data protection laws.",
+    content: "You have the right to access, correct, or delete your personal information at any time through your account settings. You can export your data in a machine-readable format. You may also request that we restrict or object to certain processing of your data. To exercise these rights, contact us at privacy@mojetech.com. We will respond to verified requests within 30 days as required by applicable data protection laws.",
   },
   {
     id: "contact",
     icon: MailIcon,
     title: "Contact",
     badge: "Get in touch",
-    content: "If you have questions or concerns about this Privacy Policy or our data practices, please contact us at privacy@molearn.com. You can also reach our Data Protection Officer at dpo@molearn.com. We are committed to protecting your privacy and will address your concerns promptly. For users in the European Economic Area, you have the right to lodge a complaint with your local data protection authority.",
+    content: "If you have questions or concerns about this Privacy Policy or our data practices, please contact us at privacy@mojetech.com. You can also reach our Data Protection Officer at dpo@mojetech.com. We are committed to protecting your privacy and will address your concerns promptly. For users in the European Economic Area, you have the right to lodge a complaint with your local data protection authority.",
   },
 ]
 
@@ -70,7 +70,7 @@ export default function PrivacyPage() {
         {/* Hero */}
         <div className="relative overflow-hidden border-b border-white/5">
           <div className="absolute inset-0 bg-gradient-to-b from-[#22c55e]/5 to-transparent pointer-events-none" />
-          <div className="max-w-4xl mx-auto px-4 pt-24 pb-16 text-center">
+          <div className="max-w-4xl mx-auto px-4 pt-28 pb-16 text-center">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -79,7 +79,7 @@ export default function PrivacyPage() {
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#22c55e]/10 text-[#22c55e] border border-[#22c55e]/20 mb-5">
                 Legal
               </span>
-              <h1 className="text-5xl font-extrabold text-white tracking-tight leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
                 Privacy{" "}
                 <span className="text-[#22c55e]">Policy</span>
               </h1>
@@ -154,7 +154,7 @@ export default function PrivacyPage() {
             <p className="mt-2 text-gray-400 text-sm">Reach our Data Protection Officer directly.</p>
             <div className="mt-5 flex items-center justify-center gap-3">
               <a
-                href="mailto:dpo@molearn.com"
+                href="mailto:dpo@mojetech.com"
                 className="h-10 px-5 bg-[#22c55e] hover:bg-[#16a34a] text-white text-sm font-semibold rounded-lg transition-colors inline-flex items-center gap-2"
               >
                 Email DPO
@@ -171,3 +171,4 @@ export default function PrivacyPage() {
     </div>
   )
 }
+

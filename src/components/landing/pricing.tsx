@@ -134,9 +134,8 @@ export function Pricing() {
             return (
               <motion.div key={tier.name} variants={item} className="flex group">
                 <div
-                  className={`relative flex flex-col bg-bg-secondary/50 backdrop-blur-sm border rounded-2xl p-6 w-full transition-all duration-300 ${
-                    tier.accent
-                  } hover:border-accent/30 hover:-translate-y-1`}
+                  className={`relative flex flex-col bg-bg-secondary/50 backdrop-blur-sm border rounded-2xl p-6 w-full transition-all duration-300 ${tier.accent
+                    } hover:border-accent/30 hover:-translate-y-1`}
                 >
                   {tier.featured && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
@@ -202,7 +201,9 @@ export function Pricing() {
         {/* Comparison table */}
         <div className="mt-20">
           <h3 className="text-xl font-bold text-text-primary text-center mb-8">Compare plans</h3>
-          <div className="overflow-x-auto">
+
+          {/* Desktop table */}
+          <div className="hidden sm:block overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-border/40">
@@ -224,6 +225,29 @@ export function Pricing() {
               </tbody>
             </table>
           </div>
+
+          {/* Mobile cards */}
+          <div className="sm:hidden space-y-3">
+            {comparison.map((row, i) => (
+              <div key={i} className="bg-bg-secondary/50 border border-border/60 rounded-xl p-4">
+                <p className="text-sm font-medium text-text-primary mb-3">{row.feature}</p>
+                <div className="grid grid-cols-3 gap-2 text-center">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider text-text-muted mb-1">Starter</p>
+                    <p className="text-xs text-text-secondary">{row.starter}</p>
+                  </div>
+                  <div className="bg-accent/5 rounded-lg py-1.5 px-1">
+                    <p className="text-[10px] uppercase tracking-wider text-accent mb-1">Pro</p>
+                    <p className="text-xs font-medium text-text-primary">{row.pro}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider text-text-muted mb-1">Enterprise</p>
+                    <p className="text-xs text-text-secondary">{row.enterprise}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* FAQ */}
@@ -242,7 +266,7 @@ export function Pricing() {
                   <span className="text-sm font-medium text-text-primary pr-4">{faq.q}</span>
                   <motion.div
                     animate={{ rotate: openFaq === i ? 180 : 0 }}
-                    transition={{ duration: 0.2, ease: "easeInOut" }}
+                    transition={{ duration: 0.2, ease: "easeInOut" as const }}
                     className="shrink-0"
                   >
                     <ChevronDown className="h-4 w-4 text-text-muted" />
@@ -265,29 +289,6 @@ export function Pricing() {
             ))}
           </div>
         </div>
-
-        {/* Teacher earnings banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="mt-16 bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-2xl p-8 md:p-10 text-center max-w-3xl mx-auto"
-        >
-          <div className="inline-flex items-center gap-2 bg-accent/10 text-accent px-3 py-1.5 rounded-full text-xs font-medium mb-4">
-            <TrendingUp className="h-3.5 w-3.5" /> For instructors
-          </div>
-          <h3 className="text-xl font-bold text-text-primary">Teach on molearn</h3>
-          <p className="mt-2 text-sm text-text-secondary max-w-lg mx-auto">
-            Upload courses and books. Our agents review quality. You keep <strong className="text-text-primary">80%</strong> of every sale.
-            No upfront costs.
-          </p>
-          <Link href="/teach">
-            <Button className="mt-5" variant="secondary">
-              Learn about teaching <ChevronRight className="h-4 w-4" />
-            </Button>
-          </Link>
-        </motion.div>
       </div>
     </section>
   )

@@ -1,241 +1,114 @@
 "use client"
 
+import { DashboardLayout, DashboardHeader } from "@/components/dashboard/layout"
+import { CalendarDays, Clock, Users, User, ChevronDown, ChevronUp, Filter } from "lucide-react"
 import { useState } from "react"
-import { DashboardLayout, DashboardHeader, StatCard } from "@/components/dashboard/layout"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import {
-  History,
-  Search,
-  Filter,
-  Download,
-  Calendar,
-  CheckCircle,
-  XCircle,
-  Clock,
-  Eye,
-  User,
-  BookOpen,
-  TrendingUp,
-  BarChart3,
-} from "lucide-react"
 
-type StatusFilter = "ALL" | "APPROVED" | "REJECTED"
-
-interface ReviewRecord {
-  id: string
-  date: string
-  title: string
-  teacher: string
-  status: "APPROVED" | "REJECTED"
-  note: string
-}
-
-const mockHistory: ReviewRecord[] = [
-  { id: "1", date: "Jul 22, 2026", title: "Flutter Mobile Development", teacher: "Sarah Chen", status: "APPROVED", note: "Content meets all quality standards. Excellent production value and accurate technical material. Recommended for platform listing." },
-  { id: "2", date: "Jul 20, 2026", title: "Advanced CSS Grid Layouts", teacher: "Mike Johnson", status: "APPROVED", note: "Well-structured curriculum with clear learning objectives. Audio quality is good, slides are professional." },
-  { id: "3", date: "Jul 18, 2026", title: "Rust Systems Programming", teacher: "Alex Rivera", status: "REJECTED", note: "Several factual errors found in the memory safety chapter. Requested revisions not yet addressed. Needs re-submission." },
-  { id: "4", date: "Jul 15, 2026", title: "Node.js Performance Guide", teacher: "Lisa Park", status: "REJECTED", note: "Outdated content referencing Node 14 features that are deprecated. Video resolution below minimum threshold of 1080p." },
-  { id: "5", date: "Jul 12, 2026", title: "React from Zero to Production", teacher: "Sarah Chen", status: "APPROVED", note: "Comprehensive coverage of React patterns. Includes testing strategies and CI/CD integration. Highly recommended." },
-  { id: "6", date: "Jul 10, 2026", title: "Advanced TypeScript Patterns", teacher: "Marcus Johnson", status: "APPROVED", note: "Deep dive into generics, conditional types, and template literals. Great for senior developers." },
-  { id: "7", date: "Jul 8, 2026", title: "Python for Data Science", teacher: "Emily Watson", status: "APPROVED", note: "Good balance of theory and hands-on exercises. Datasets are realistic and well-structured." },
-  { id: "8", date: "Jul 5, 2026", title: "GraphQL API Design", teacher: "David Kim", status: "APPROVED", note: "Clear explanations of schema design principles. Covers security considerations thoroughly." },
-  { id: "9", date: "Jul 3, 2026", title: "Docker & Kubernetes Basics", teacher: "Mike Johnson", status: "REJECTED", note: "Kubernetes section uses deprecated API versions. Labs do not work with current tooling." },
-  { id: "10", date: "Jun 30, 2026", title: "UI/UX Design Principles", teacher: "Sophie Laurent", status: "APPROVED", note: "Polished content with strong visual examples. Accessibility section is particularly well done." },
+const sessionLog = [
+  { id: "1", student: "Amara Okafor", type: "1-on-1", date: "Jul 28, 2026", time: "2:00 PM", duration: "45 min", status: "Completed", notes: "Reviewed React component architecture. Amara is progressing well with hooks and state management. Discussed useEffect cleanup patterns and custom hooks. Assigned practice with context API." },
+  { id: "2", student: "Web Dev Cohort 12", type: "Group", date: "Jul 27, 2026", time: "10:00 AM", duration: "1 hr 30 min", status: "Completed", notes: "Covered REST API design principles and Express.js middleware. Students had questions about authentication flows. Assigned group project for building a CRUD API." },
+  { id: "3", student: "David Mensah", type: "1-on-1", date: "Jul 25, 2026", time: "3:00 PM", duration: "30 min", status: "Completed", notes: "Debugged Node.js async issues. David was struggling with Promise chaining vs async/await. Walked through error handling patterns and middleware sequencing." },
+  { id: "4", student: "Mobile Cohort 5", type: "Group", date: "Jul 24, 2026", time: "11:00 AM", duration: "1 hr", status: "Completed", notes: "Introduction to Flutter widgets and state management. Covered StatelessWidget vs StatefulWidget, and basic Provider pattern. Students built a simple counter app." },
+  { id: "5", student: "Fatima Bello", type: "1-on-1", date: "Jul 23, 2026", time: "1:00 PM", duration: "45 min", status: "Completed", notes: "Reviewed database schema design assignment. Fatima showed strong understanding of normalization. Discussed indexing strategies and query optimization basics." },
+  { id: "6", student: "Grace Adeyemi", type: "1-on-1", date: "Jul 22, 2026", time: "4:00 PM", duration: "30 min", status: "Completed", notes: "CSS Grid and Flexbox review. Grace needed help with responsive layouts. Practiced building a dashboard layout using CSS Grid with auto-fit and minmax." },
+  { id: "7", student: "Web Dev Cohort 12", type: "Group", date: "Jul 21, 2026", time: "10:00 AM", duration: "1 hr 30 min", status: "Completed", notes: "Git workflow workshop. Covered branching strategies, merge vs rebase, and pull request best practices. Students practiced resolving merge conflicts in pairs." },
+  { id: "8", student: "Kwame Asante", type: "1-on-1", date: "Jul 20, 2026", time: "2:00 PM", duration: "45 min", status: "Completed", notes: "Flutter navigation and routing. Kwame is building a multi-screen app. Discussed named routes, Navigator 2.0 basics, and passing data between screens." },
+  { id: "9", student: "Emeka Obi", type: "1-on-1", date: "Jul 18, 2026", time: "3:30 PM", duration: "30 min", status: "Cancelled", notes: "" },
+  { id: "10", student: "Mobile Cohort 5", type: "Group", date: "Jul 17, 2026", time: "11:00 AM", duration: "1 hr", status: "Completed", notes: "API integration workshop. Students learned to fetch data from REST APIs using http package in Flutter. Covered JSON parsing, error handling, and loading states." },
 ]
 
-const totalReviewed = 48
-const approved = 38
-const rejected = 10
-const pageSize = 10
-const approvalRate = 79
-const avgReviewDays = 2.3
-const reviewsThisMonth = 7
+export default function SessionHistoryPage() {
+  const [expandedId, setExpandedId] = useState<string | null>(null)
+  const [typeFilter, setTypeFilter] = useState<"All" | "1-on-1" | "Group">("All")
+  const [statusFilter, setStatusFilter] = useState<"All" | "Completed" | "Cancelled">("All")
 
-export default function Page() {
-  const [search, setSearch] = useState("")
-  const [statusFilter, setStatusFilter] = useState<StatusFilter>("ALL")
-  const [startDate, setStartDate] = useState("")
-  const [endDate, setEndDate] = useState("")
-  const [page, setPage] = useState(1)
-
-  const filtered = mockHistory.filter((r) => {
-    if (statusFilter !== "ALL" && r.status !== statusFilter) return false
-    if (search && !r.title.toLowerCase().includes(search.toLowerCase()) && !r.teacher.toLowerCase().includes(search.toLowerCase())) return false
+  const filtered = sessionLog.filter((s) => {
+    if (typeFilter !== "All" && s.type !== typeFilter) return false
+    if (statusFilter !== "All" && s.status !== statusFilter) return false
     return true
   })
 
-  const totalPages = Math.ceil(filtered.length / pageSize) || 1
-  const paginated = filtered.slice((page - 1) * pageSize, page * pageSize)
-  const startIndex = (page - 1) * pageSize + 1
-  const endIndex = Math.min(page * pageSize, filtered.length)
-
   return (
     <DashboardLayout role="AGENT">
-      <DashboardHeader title="Review History" description="View past review decisions and agent activity." />
+      <DashboardHeader title="Session History" description="View your past mentoring sessions and notes." />
 
-      {/* Stats Row */}
-      <div className="grid gap-4 sm:grid-cols-3 mb-8">
-        <StatCard icon={History} label="Total Reviewed" value={String(totalReviewed)} color="bg-blue-500/10" />
-        <StatCard icon={CheckCircle} label="Approved" value={String(approved)} color="bg-emerald-500/10" />
-        <StatCard icon={XCircle} label="Rejected" value={String(rejected)} color="bg-red-500/10" />
-      </div>
-
-      {/* Filters Row */}
+      {/* Filters */}
       <div className="flex flex-wrap items-center gap-3 mb-6">
-        <div className="flex items-center gap-2 bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-lg px-3 py-2">
-          <Calendar className="h-4 w-4 text-text-muted shrink-0" />
-          <input
-            type="text"
-            placeholder="Start date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-            className="bg-transparent text-text-primary text-sm w-28 outline-none placeholder:text-text-muted"
-          />
-          <span className="text-text-muted text-xs">—</span>
-          <input
-            type="text"
-            placeholder="End date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-            className="bg-transparent text-text-primary text-sm w-28 outline-none placeholder:text-text-muted"
-          />
+        <div className="flex items-center gap-2 text-sm text-text-muted">
+          <Filter className="h-4 w-4" />
+          <span>Filter:</span>
         </div>
-
-        <div className="flex items-center gap-2 bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-lg px-3 py-2">
-          <Filter className="h-4 w-4 text-text-muted shrink-0" />
-          <select
-            value={statusFilter}
-            onChange={(e) => { setStatusFilter(e.target.value as StatusFilter); setPage(1) }}
-            className="bg-transparent text-text-primary text-sm outline-none appearance-none cursor-pointer"
-          >
-            <option value="ALL">All Status</option>
-            <option value="APPROVED">Approved</option>
-            <option value="REJECTED">Rejected</option>
-          </select>
-        </div>
-
-        <div className="flex items-center gap-2 bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-lg px-3 py-2 flex-1 min-w-[200px]">
-          <Search className="h-4 w-4 text-text-muted shrink-0" />
-          <input
-            type="text"
-            placeholder="Search by title or teacher..."
-            value={search}
-            onChange={(e) => { setSearch(e.target.value); setPage(1) }}
-            className="bg-transparent text-text-primary text-sm flex-1 outline-none placeholder:text-text-muted"
-          />
-        </div>
-
-        <Button variant="secondary" size="sm">
-          <Download className="h-4 w-4" />
-          Export
-        </Button>
+        <select
+          value={typeFilter}
+          onChange={(e) => setTypeFilter(e.target.value as any)}
+          className="h-8 px-3 rounded-lg bg-bg-secondary border border-border/60 text-xs text-text-primary focus:outline-none focus:border-accent/50 transition-colors"
+        >
+          <option value="All">All Types</option>
+          <option value="1-on-1">1-on-1</option>
+          <option value="Group">Group</option>
+        </select>
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value as any)}
+          className="h-8 px-3 rounded-lg bg-bg-secondary border border-border/60 text-xs text-text-primary focus:outline-none focus:border-accent/50 transition-colors"
+        >
+          <option value="All">All Statuses</option>
+          <option value="Completed">Completed</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+        <span className="text-xs text-text-muted ml-auto">{filtered.length} sessions</span>
       </div>
 
-      {/* Review History Table */}
-      <div className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl overflow-hidden mb-6">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-border/40 text-left">
-              <th className="px-5 py-3 text-xs font-medium text-text-muted">Date</th>
-              <th className="px-5 py-3 text-xs font-medium text-text-muted">Product Title</th>
-              <th className="px-5 py-3 text-xs font-medium text-text-muted">Teacher</th>
-              <th className="px-5 py-3 text-xs font-medium text-text-muted">Status</th>
-              <th className="px-5 py-3 text-xs font-medium text-text-muted w-1/3">Agent Note</th>
-              <th className="px-5 py-3 text-xs font-medium text-text-muted text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paginated.map((r) => (
-              <tr key={r.id} className="border-b border-border/20 last:border-0 hover:bg-bg-elevated/30 transition-colors">
-                <td className="px-5 py-3.5 text-text-secondary whitespace-nowrap text-xs">{r.date}</td>
-                <td className="px-5 py-3.5 text-sm font-medium text-text-primary">{r.title}</td>
-                <td className="px-5 py-3.5 text-text-secondary text-xs">{r.teacher}</td>
-                <td className="px-5 py-3.5">
-                  {r.status === "APPROVED" ? (
-                    <Badge variant="success" className="text-[10px]">APPROVED</Badge>
+      {/* Session Log */}
+      <div className="space-y-3">
+        {filtered.map((session) => (
+          <div key={session.id} className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl overflow-hidden">
+            <div className="flex items-center justify-between gap-4 p-5">
+              <div className="flex items-center gap-4 min-w-0">
+                <div className={`flex h-10 w-10 items-center justify-center rounded-lg shrink-0 ${
+                  session.type === "Group" ? "bg-blue-500/10" : "bg-purple-500/10"
+                }`}>
+                  {session.type === "Group" ? (
+                    <Users className="h-5 w-5 text-blue-400" />
                   ) : (
-                    <Badge className="bg-red-500/10 text-red-400 text-[10px] border-0">REJECTED</Badge>
+                    <User className="h-5 w-5 text-purple-400" />
                   )}
-                </td>
-                <td className="px-5 py-3.5 text-text-secondary text-xs">
-                  <span className="line-clamp-2">{r.note}</span>
-                </td>
-                <td className="px-5 py-3.5 text-right">
-                  <Button variant="ghost" size="sm">
-                    <Eye className="h-4 w-4" />
-                    View
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        {filtered.length === 0 && (
-          <div className="px-5 py-12 text-center text-text-muted text-sm">
-            No review records found.
-          </div>
-        )}
-      </div>
-
-      {/* Pagination */}
-      <div className="flex items-center justify-between mb-8">
-        <p className="text-xs text-text-muted">
-          Showing {startIndex}–{endIndex} of {filtered.length}
-        </p>
-        <div className="flex items-center gap-2">
-          <Button
-            variant="secondary"
-            size="sm"
-            disabled={page <= 1}
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="secondary"
-            size="sm"
-            disabled={page >= totalPages}
-            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-          >
-            Next
-          </Button>
-        </div>
-      </div>
-
-      {/* Performance Section */}
-      <h2 className="text-lg font-semibold text-text-primary mb-4">Agent Performance</h2>
-      <div className="grid gap-4 sm:grid-cols-3 mb-8">
-        <div className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl p-5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
-              <TrendingUp className="h-5 w-5 text-accent" />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="text-sm font-medium text-text-primary truncate">{session.student}</h3>
+                  <div className="flex items-center gap-3 mt-0.5">
+                    <span className="text-xs text-text-muted">{session.date}</span>
+                    <span className="text-xs text-text-muted">{session.time}</span>
+                    <span className="text-xs text-text-muted">{session.duration}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
+                  session.type === "Group" ? "bg-blue-500/10 text-blue-400" : "bg-purple-500/10 text-purple-400"
+                }`}>{session.type}</span>
+                <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
+                  session.status === "Completed" ? "bg-emerald-500/10 text-emerald-400" : "bg-red-500/10 text-red-400"
+                }`}>{session.status}</span>
+                {session.notes && (
+                  <button
+                    onClick={() => setExpandedId(expandedId === session.id ? null : session.id)}
+                    className="h-8 px-3 rounded-lg bg-bg-elevated text-text-secondary text-xs font-medium hover:text-text-primary transition-colors flex items-center gap-1.5"
+                  >
+                    {expandedId === session.id ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+                    View Notes
+                  </button>
+                )}
+              </div>
             </div>
-            <span className="text-xs font-medium text-text-muted">Approval Rate</span>
-          </div>
-          <p className="text-2xl font-bold text-text-primary">{approvalRate}%</p>
-        </div>
 
-        <div className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl p-5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10">
-              <Clock className="h-5 w-5 text-amber-400" />
-            </div>
-            <span className="text-xs font-medium text-text-muted">Avg Review Time</span>
+            {expandedId === session.id && session.notes && (
+              <div className="border-t border-border/30 p-5 bg-bg-elevated/20">
+                <p className="text-sm text-text-secondary leading-relaxed">{session.notes}</p>
+              </div>
+            )}
           </div>
-          <p className="text-2xl font-bold text-text-primary">{avgReviewDays} days</p>
-        </div>
-
-        <div className="bg-bg-secondary/50 backdrop-blur-sm border border-border/60 rounded-xl p-5">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10">
-              <BarChart3 className="h-5 w-5 text-blue-400" />
-            </div>
-            <span className="text-xs font-medium text-text-muted">Reviews This Month</span>
-          </div>
-          <p className="text-2xl font-bold text-text-primary">{reviewsThisMonth}</p>
-        </div>
+        ))}
       </div>
     </DashboardLayout>
   )

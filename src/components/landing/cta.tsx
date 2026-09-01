@@ -42,15 +42,14 @@ export function CTA() {
   return (
     <section className="relative z-10 py-20 md:py-28">
       <div className="w-full px-4">
-        {/* Two cards */}
+        {/* Student card */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
-          className="grid gap-6 md:grid-cols-2 w-full mb-16"
+          className="w-full mb-16 max-w-2xl mx-auto"
         >
-          {/* Student card */}
           <motion.div variants={cardItem}>
             <div className="group relative overflow-hidden rounded-2xl border border-border/60 bg-bg-secondary/50 backdrop-blur-sm p-8 md:p-10 h-full transition-all duration-300 hover:border-accent/30 hover:-translate-y-1">
               <div className="absolute top-0 right-0 w-48 h-48 rounded-full bg-accent/5 blur-[60px] group-hover:bg-accent/10 transition-colors" />
@@ -78,42 +77,6 @@ export function CTA() {
                 <Link href="/browse">
                   <Button size="lg" className="gap-2 group/btn">
                     Browse courses
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Teacher card */}
-          <motion.div variants={cardItem}>
-            <div className="group relative overflow-hidden rounded-2xl border border-accent/30 bg-bg-secondary/50 backdrop-blur-sm p-8 md:p-10 h-full transition-all duration-300 hover:border-accent/50 hover:-translate-y-1 shadow-lg shadow-accent/5">
-              <div className="absolute inset-0 rounded-2xl border border-accent/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="absolute top-0 right-0 w-48 h-48 rounded-full bg-accent/5 blur-[60px] group-hover:bg-accent/10 transition-colors" />
-              <div className="relative">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10">
-                    <DollarSign className="h-6 w-6 text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-text-primary">Start teaching</h3>
-                    <p className="text-xs text-text-muted">For instructors</p>
-                  </div>
-                </div>
-                <p className="text-sm text-text-secondary leading-relaxed mb-6">
-                  Share your expertise and earn money. Create courses and books — we handle payments, you keep 80%.
-                </p>
-                <ul className="space-y-2.5 mb-8">
-                  {["Keep 80% of every sale", "Agent-reviewed quality assurance", "Detailed analytics dashboard", "Weekly Stripe payouts"].map((f) => (
-                    <li key={f} className="flex items-center gap-2.5 text-sm text-text-secondary">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <Link href="/teach">
-                  <Button size="lg" variant="primary" className="gap-2 group/btn shadow-lg shadow-accent/10">
-                    Start creating
                     <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
                   </Button>
                 </Link>
